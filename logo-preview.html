@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attigo Logo Preview</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #f5f7f9;
+            padding: 40px;
+            min-height: 100vh;
+        }
+        h1 {
+            text-align: center;
+            color: #1a1f26;
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .preview-card {
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .preview-card.light {
+            background: #FAFBFC;
+        }
+        .preview-card.dark {
+            background: #2E4A62;
+        }
+        .preview-card h3 {
+            margin-bottom: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        .preview-card.light h3 {
+            color: #6b7280;
+        }
+        .preview-card.dark h3 {
+            color: rgba(255,255,255,0.6);
+        }
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80px;
+        }
+        .logo-container svg {
+            height: 60px;
+            width: auto;
+        }
+        .logo-container.primary {
+            color: #2E4A62;
+        }
+        .logo-container.white {
+            color: white;
+        }
+        .color-info {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #9ca3af;
+        }
+    </style>
+</head>
+<body>
+    <h1>New Attigo Logo</h1>
+    
+    <div class="preview-grid">
+        <div class="preview-card light">
+            <h3>On Light Background</h3>
+            <div class="logo-container primary">
+                <svg viewBox="0 0 200 100" fill="none">
+                    <path d="M100 8 L145 50 L135 50 L100 18 L65 50 L55 50 Z" fill="currentColor"/>
+                    <path d="M100 28 L135 60 L125 60 L100 38 L75 60 L65 60 Z" fill="currentColor"/>
+                    <path d="M28 92 L40 62 L52 92 L46 92 L44 86 L36 86 L34 92 Z M40 70 L37.5 80 L42.5 80 Z" fill="currentColor"/>
+                    <path d="M54 62 L72 62 L72 67 L66 67 L66 92 L60 92 L60 67 L54 67 Z" fill="currentColor"/>
+                    <path d="M74 62 L92 62 L92 67 L86 67 L86 92 L80 92 L80 67 L74 67 Z" fill="currentColor"/>
+                    <path d="M96 62 L102 62 L102 92 L96 92 Z" fill="currentColor"/>
+                    <path d="M106 62 L126 62 L126 67 L112 67 L112 87 L120 87 L120 79 L114 79 L114 74 L126 74 L126 92 L106 92 Z" fill="currentColor"/>
+                    <path d="M130 62 L152 62 L152 92 L130 92 Z M136 67 L136 87 L146 87 L146 67 Z" fill="currentColor"/>
+                </svg>
+            </div>
+            <p class="color-info">Color: #2E4A62 (Primary)</p>
+        </div>
+        
+        <div class="preview-card dark">
+            <h3>On Dark Background</h3>
+            <div class="logo-container white">
+                <svg viewBox="0 0 200 100" fill="none">
+                    <path d="M100 8 L145 50 L135 50 L100 18 L65 50 L55 50 Z" fill="currentColor"/>
+                    <path d="M100 28 L135 60 L125 60 L100 38 L75 60 L65 60 Z" fill="currentColor"/>
+                    <path d="M28 92 L40 62 L52 92 L46 92 L44 86 L36 86 L34 92 Z M40 70 L37.5 80 L42.5 80 Z" fill="currentColor"/>
+                    <path d="M54 62 L72 62 L72 67 L66 67 L66 92 L60 92 L60 67 L54 67 Z" fill="currentColor"/>
+                    <path d="M74 62 L92 62 L92 67 L86 67 L86 92 L80 92 L80 67 L74 67 Z" fill="currentColor"/>
+                    <path d="M96 62 L102 62 L102 92 L96 92 Z" fill="currentColor"/>
+                    <path d="M106 62 L126 62 L126 67 L112 67 L112 87 L120 87 L120 79 L114 79 L114 74 L126 74 L126 92 L106 92 Z" fill="currentColor"/>
+                    <path d="M130 62 L152 62 L152 92 L130 92 Z M136 67 L136 87 L146 87 L146 67 Z" fill="currentColor"/>
+                </svg>
+            </div>
+            <p class="color-info" style="color: rgba(255,255,255,0.5)">Color: White</p>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 60px;">
+        <h2 style="font-weight: 500; margin-bottom: 20px;">Original for Reference</h2>
+        <img src="logo.png" alt="Original Logo" style="max-width: 300px; border-radius: 8px;">
+    </div>
+</body>
+</html>

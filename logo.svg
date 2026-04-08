@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" fill="none">
+  <!-- Double Chevron Mountain Mark -->
+  <path d="M100 8 L145 50 L135 50 L100 18 L65 50 L55 50 Z" fill="currentColor"/>
+  <path d="M100 28 L135 60 L125 60 L100 38 L75 60 L65 60 Z" fill="currentColor"/>
+  
+  <!-- ATTIGO Text - geometric sans with pointed A -->
+  <!-- A -->
+  <path d="M28 92 L40 62 L52 92 L46 92 L44 86 L36 86 L34 92 Z M40 70 L37.5 80 L42.5 80 Z" fill="currentColor"/>
+  <!-- T -->
+  <path d="M54 62 L72 62 L72 67 L66 67 L66 92 L60 92 L60 67 L54 67 Z" fill="currentColor"/>
+  <!-- T -->
+  <path d="M74 62 L92 62 L92 67 L86 67 L86 92 L80 92 L80 67 L74 67 Z" fill="currentColor"/>
+  <!-- I -->
+  <path d="M96 62 L102 62 L102 92 L96 92 Z" fill="currentColor"/>
+  <!-- G -->
+  <path d="M106 62 L126 62 L126 67 L112 67 L112 87 L120 87 L120 79 L114 79 L114 74 L126 74 L126 92 L106 92 Z" fill="currentColor"/>
+  <!-- O -->
+  <path d="M130 62 L152 62 L152 92 L130 92 Z M136 67 L136 87 L146 87 L146 67 Z" fill="currentColor"/>
+</svg>
