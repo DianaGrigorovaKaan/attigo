@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Compliance Applicability Check</title>
+    <style>
+        :root {
+            --navy: #2E4A62;
+            --navy-dark: #1E3347;
+            --lblue-bright: #5B8FB4;
+            --lblue-pale: #A8C4DA;
+            --bg: #F4F6F8;
+            --white: #FFFFFF;
+            --text: #1A1A2E;
+            --text-med: #4A5568;
+            --border: #D1D9E0;
+            --success: #2D8659;
+            --warning: #C27022;
+            --error: #B83232;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg); color: var(--text);
+            padding: 18px; max-width: 480px; line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h2 { font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+        .partner { font-size: 0.75rem; color: var(--text-med); margin-bottom: 14px; }
+        .partner b { color: var(--navy); font-weight: 600; }
+
+        .q { margin-bottom: 14px; }
+        .q label { display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 6px; }
+
+        select {
+            width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: 5px;
+            font-size: 0.9rem; font-family: inherit; color: var(--text); background: var(--white);
+        }
+        select:focus { outline: 2px solid var(--lblue-bright); outline-offset: 1px; border-color: var(--lblue-bright); }
+
+        .btn {
+            display: inline-block; width: 100%; padding: 11px 20px; background: var(--navy); color: #fff;
+            border: none; border-radius: 5px; font-size: 0.9rem; font-weight: 600; font-family: inherit;
+            cursor: pointer; margin-top: 8px; transition: background .15s;
+        }
+        .btn:hover { background: var(--navy-dark); }
+        .btn:disabled { background: var(--lblue-pale); cursor: not-allowed; }
+
+        .result {
+            padding: 11px 13px; border-radius: 5px; margin-bottom: 8px;
+            border-left: 3px solid; font-size: 0.85rem; color: var(--text-med);
+        }
+        .result.applies { border-color: var(--error); background: #FBEDEE; }
+        .result.maybe { border-color: var(--warning); background: #FAF1E8; }
+        .result.na { border-color: var(--success); background: #EBF4EF; }
+        .result strong { font-size: 0.9rem; color: var(--navy); }
+
+        .tag { font-size: 0.68rem; font-weight: 600; padding: 1px 7px; border-radius: 8px; float: right; letter-spacing: 0.03em; }
+        .tag-y { background: #F6DCDC; color: var(--error); }
+        .tag-m { background: #F4E3CC; color: #8A4F18; }
+        .tag-n { background: #DCEDE4; color: #1F6644; }
+
+        .cta { text-align: center; margin-top: 16px; padding: 13px; background: var(--navy); border-radius: 5px; }
+        .cta a { color: #fff; text-decoration: none; font-size: 0.85rem; font-weight: 500; }
+
+        .btn-reset {
+            background: transparent; color: var(--navy); border: 1px solid var(--navy);
+            margin-top: 12px; font-weight: 500;
+        }
+        .btn-reset:hover { background: #EAF1F6; }
+
+        .powered { text-align: center; margin-top: 12px; font-size: 0.72rem; color: var(--text-med); }
+        .powered a { color: var(--navy); text-decoration: none; font-weight: 500; }
+
+        #results { display: none; }
+        #form { display: block; }
+    </style>
+</head>
+<body>
+    <div id="form">
+        <h2>Does CRA or NIS2 apply to you?</h2>
+        <p class="partner" id="partnerLine">A quick applicability check for your product.</p>
+
+        <div class="q">
+            <label>Product type</label>
+            <select id="pType">
+                <option value="">Select...</option>
+                <option value="hw">Hardware with software</option>
+                <option value="sw">Software product</option>
+                <option value="saas">SaaS / Cloud service</option>
+                <option value="ot">OT / Industrial</option>
+                <option value="comp">Software component</option>
+            </select>
+        </div>
+
+        <div class="q">
+            <label>Sell in EU?</label>
+            <select id="eu">
+                <option value="">Select...</option>
+                <option value="yes">Yes</option>
+                <option value="plan">Planning to</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+
+        <div class="q">
+            <label>Network connected?</label>
+            <select id="net">
+                <option value="">Select...</option>
+                <option value="yes">Yes (internet)</option>
+                <option value="local">Local network only</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+
+        <div class="q">
+            <label>Company size</label>
+            <select id="size">
+                <option value="">Select...</option>
+                <option value="s">Small (under 50)</option>
+                <option value="m">Medium (50-249)</option>
+                <option value="l">Large (250+)</option>
+            </select>
+        </div>
+
+        <div class="q">
+            <label>Sector</label>
+            <select id="sector">
+                <option value="">Select...</option>
+                <option value="energy">Energy</option>
+                <option value="transport">Transport</option>
+                <option value="health">Health</option>
+                <option value="finance">Finance</option>
+                <option value="mfg">Manufacturing</option>
+                <option value="digital">Digital infra</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+
+        <button class="btn" onclick="check()" id="checkBtn" disabled>Check applicability</button>
+    </div>
+
+    <div id="results">
+        <h2>Results</h2>
+        <div id="resultList"></div>
+
+        <div class="cta">
+            <a href="https://attigo.dk">Argus automates compliance for CRA and NIS2 &rarr;</a>
+        </div>
+
+        <button class="btn btn-reset" onclick="resetForm()">Start over</button>
+    </div>
+
+    <div class="powered">Powered by <a href="https://attigo.dk">Argus by Attigo</a></div>
+
+    <script>
+        // Co-branding via ?partner=Name
+        (function() {
+            const partner = new URLSearchParams(location.search).get('partner');
+            if (partner) {
+                const clean = partner.replace(/[<>]/g, '').slice(0, 60);
+                document.getElementById('partnerLine').innerHTML = 'Provided by <b>' + clean + '</b> with Argus by Attigo.';
+            }
+        })();
+
+        const fields = ['pType', 'eu', 'net', 'size', 'sector'];
+        fields.forEach(id => document.getElementById(id).addEventListener('change', gate));
+
+        function gate() {
+            const done = fields.every(id => document.getElementById(id).value);
+            document.getElementById('checkBtn').disabled = !done;
+        }
+
+        function check() {
+            const p = document.getElementById('pType').value;
+            const eu = document.getElementById('eu').value;
+            const net = document.getElementById('net').value;
+            const sz = document.getElementById('size').value;
+            const sec = document.getElementById('sector').value;
+
+            const inEU = eu === 'yes' || eu === 'plan';
+            const connected = net !== 'no';
+            const isProduct = p === 'hw' || p === 'sw' || p === 'comp' || p === 'ot';
+            const essential = ['energy','transport','health','finance','digital'].includes(sec);
+            const big = sz === 'm' || sz === 'l';
+
+            const r = [];
+
+            // CRA
+            if (inEU && connected && isProduct) r.push({n:'CRA (Cyber Resilience Act)',s:'applies',d:'Your connected product sold in the EU triggers CRA. Deadline: Dec 2027.'});
+            else if (inEU && p === 'saas') r.push({n:'CRA',s:'maybe',d:'Pure SaaS is generally excluded, but downloadable components may be in scope.'});
+            else r.push({n:'CRA',s:'na',d:'CRA targets connected products sold in the EU.'});
+
+            // NIS2
+            if (inEU && essential && big) r.push({n:'NIS2 Directive',s:'applies',d:'Your sector and size trigger NIS2. Already in effect.'});
+            else if (inEU && essential) r.push({n:'NIS2',s:'maybe',d:'Your sector is covered but NIS2 mainly targets medium and large entities.'});
+            else r.push({n:'NIS2',s:'na',d:'NIS2 targets essential and important sectors at scale.'});
+
+            // IEC 62443
+            if (p === 'ot' || (p === 'hw' && (sec === 'energy' || sec === 'mfg'))) r.push({n:'IEC 62443',s:'applies',d:'Industrial and OT products increasingly require IEC 62443.'});
+            else r.push({n:'IEC 62443',s:'na',d:'IEC 62443 is specific to industrial control systems.'});
+
+            const list = document.getElementById('resultList');
+            list.innerHTML = '';
+            r.forEach(item => {
+                const tc = item.s === 'applies' ? 'tag-y' : item.s === 'maybe' ? 'tag-m' : 'tag-n';
+                const tl = item.s === 'applies' ? 'APPLIES' : item.s === 'maybe' ? 'MAYBE' : 'N/A';
+                list.innerHTML += `<div class="result ${item.s === 'na' ? 'na' : item.s}"><span class="tag ${tc}">${tl}</span><strong>${item.n}</strong><br/>${item.d}</div>`;
+            });
+
+            document.getElementById('form').style.display = 'none';
+            document.getElementById('results').style.display = 'block';
+        }
+
+        function resetForm() {
+            document.getElementById('form').style.display = 'block';
+            document.getElementById('results').style.display = 'none';
+            fields.forEach(id => document.getElementById(id).value = '');
+            gate();
+        }
+    </script>
+</body>
+</html>
