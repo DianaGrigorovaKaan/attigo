@@ -294,7 +294,6 @@ h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
     width: 1px;
     height: 40px;
     background: linear-gradient(to bottom, var(--color-primary), transparent);
-    animation: scrollPulse 2s ease-in-out infinite;
 }
 
 @keyframes scrollPulse {
@@ -1353,7 +1352,7 @@ h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
     color: var(--color-text-light) !important;
 }
 
-/* Animation on scroll */
+/* CSS-only entrance animation; content stays visible without JavaScript. */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -1365,13 +1364,43 @@ h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
     }
 }
 
-.service-card,
-.offering-card,
-.value-card,
-.faq-item,
-.team-member,
-.engineer-card {
-    animation: fadeInUp 0.6s ease forwards;
+@media (prefers-reduced-motion: no-preference) {
+    .scroll-line {
+        animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    .service-card,
+    .offering-card,
+    .value-card,
+    .faq-item,
+    .team-member,
+    .engineer-card {
+        animation: fadeInUp 0.6s ease;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .btn {
+        transition: background-color var(--transition-base), color var(--transition-base), border-color var(--transition-base);
+    }
+
+    .card-link svg {
+        transition: none;
+    }
+
+    .btn-primary:hover,
+    .btn-light:hover,
+    .card-link:hover svg {
+        transform: none;
+    }
+
+    .card-link:hover {
+        gap: var(--space-sm);
+    }
 }
 
 /* Responsive adjustments for engineers grid */
