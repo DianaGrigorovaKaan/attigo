@@ -4,99 +4,130 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Attigo Logo Preview</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: #f5f7f9;
-            padding: 40px 20px;
-            min-height: 100vh;
-        }
-        h1 {
-            text-align: center;
-            color: #1a1f26;
-            margin-bottom: 40px;
-            font-weight: 500;
-        }
-        .preview-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-            gap: 30px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .preview-card {
-            border-radius: 12px;
-            padding: 40px;
-            text-align: center;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-        }
-        .preview-card.light {
-            background: #FAFBFC;
-        }
-        .preview-card.dark {
-            background: #2E4A62;
-        }
-        .preview-card h2 {
-            margin-bottom: 30px;
-            font-size: 14px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-        .preview-card.light h2 {
-            color: #6b7280;
-        }
-        .preview-card.dark h2 {
-            color: rgba(255,255,255,0.8);
-        }
-        .logo-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 180px;
-        }
-        .logo-container img {
-            width: 100%;
-            max-width: 320px;
-            height: auto;
-        }
-        .color-info a { color: inherit; }
-        .preview-card.dark .color-info { color: rgba(255,255,255,0.8); }
-        .color-info {
-            margin-top: 20px;
-            font-size: 13px;
-            color: #626A78;
+        body { font-family: system-ui, sans-serif; background: #F4F6F8; color: #1A1F26; padding: 40px 20px 64px; line-height: 1.6; }
+        main { max-width: 1000px; margin: auto; }
+        h1, h2, h3 { font-weight: 500; line-height: 1.25; }
+        h1 { font-size: clamp(28px, 5vw, 36px); }
+        h2 { font-size: 24px; }
+        h3 { font-size: 13px; text-transform: uppercase; letter-spacing: .1em; }
+        .intro { text-align: center; margin-bottom: 48px; }
+        .intro p, .section-note { color: #626A78; margin-top: 10px; }
+        section + section { margin-top: 48px; }
+        .preview-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 24px; margin-top: 20px; }
+        .card { padding: 28px; border-radius: 10px; text-align: center; background: #FAFBFC; color: #2E4A62; box-shadow: 0 2px 12px rgba(0,0,0,.05); }
+        .dark { background: #2E4A62; color: #fff; }
+        .art { display: flex; align-items: center; justify-content: center; min-height: 220px; padding: 24px 0; }
+        .art img { width: 100%; max-width: 320px; height: auto; }
+        .horizontal .art { min-height: 150px; }
+        .horizontal .art img { max-width: 420px; }
+        a { color: inherit; text-underline-offset: 3px; }
+        .download { font-size: 13px; }
+        :focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
+        .sizes { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 24px; min-height: 160px; padding: 24px 0; }
+        .sizes figure { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+        .sizes img { display: block; }
+        figcaption { font-size: 12px; }
+        .header-demo { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; margin-top: 20px; padding: 20px 28px; background: #FAFBFC; color: #2E4A62; border-radius: 8px; }
+        .header-demo.dark { background: #2E4A62; color: #fff; }
+        .header-demo .brand { display: inline-flex; }
+        .header-demo img { width: auto; height: 36px; display: block; }
+        .header-demo nav { display: flex; flex-wrap: wrap; gap: 24px; font-size: 15px; }
+        .header-demo nav a { text-decoration: none; }
+        .header-demo nav a:hover { text-decoration: underline; }
+        .reference { text-align: center; }
+        .reference img { display: block; width: 100%; max-width: 560px; height: auto; border-radius: 8px; margin: 20px auto 0; }
+        @media (max-width: 600px) {
+            .header-demo { padding: 20px 16px; gap: 12px; }
+            .header-demo img { height: 28px; max-width: 100%; }
+            .header-demo nav a:not(:last-child) { display: none; }
         }
     </style>
 </head>
 <body>
-    <h1>Attigo Logo — Original Mark</h1>
-    
-    <div class="preview-grid">
-        <div class="preview-card light">
-            <h2>On Light Background</h2>
-            <div class="logo-container">
-                <img src="logo-reference-navy.svg" alt="Attigo original mark in navy" width="1258" height="650">
+<main>
+    <header class="intro">
+        <h1>Attigo logo set</h1>
+        <p>The original mark, refined for large displays, headers and small icons.</p>
+    </header>
+
+    <section aria-labelledby="stacked-title">
+        <h2 id="stacked-title">Stacked</h2>
+        <p class="section-note">The main signature. Balanced chevron weights, a lighter joined T bar and a connected A.</p>
+        <div class="preview-grid">
+            <div class="card">
+                <h3>Navy on light</h3>
+                <div class="art"><img src="logo-reference-navy.svg" alt="Attigo stacked logo in navy" width="1258" height="650"></div>
+                <a class="download" href="logo-reference-navy.svg" download>Download stacked navy SVG</a>
             </div>
-            <p class="color-info">Color: #2E4A62 (Primary)</p>
-            <p class="color-info"><a href="logo-reference-navy.svg" download>Download navy SVG</a></p>
-        </div>
-        
-        <div class="preview-card dark">
-            <h2>On Dark Background</h2>
-            <div class="logo-container">
-                <img src="logo-reference-white.svg" alt="Attigo original mark in white" width="1258" height="650">
+            <div class="card dark">
+                <h3>White on navy</h3>
+                <div class="art"><img src="logo-reference-white.svg" alt="Attigo stacked logo in white" width="1258" height="650"></div>
+                <a class="download" href="logo-reference-white.svg" download>Download stacked white SVG</a>
             </div>
-            <p class="color-info">Color: White</p>
-            <p class="color-info"><a href="logo-reference-white.svg" download>Download white SVG</a></p>
         </div>
-    </div>
-    
-    <div style="text-align: center; margin-top: 60px;">
-        <h2 style="font-weight: 500; margin-bottom: 20px;">Original for Reference</h2>
-        <img src="logo.png" alt="Original Logo" style="width: 100%; max-width: 560px; height: auto; border-radius: 8px;">
-    </div>
+    </section>
+
+    <section class="horizontal" aria-labelledby="horizontal-title">
+        <h2 id="horizontal-title">Horizontal</h2>
+        <p class="section-note">For headers and other shallow spaces, with more room for the name.</p>
+        <div class="preview-grid">
+            <div class="card">
+                <h3>Navy on light</h3>
+                <div class="art"><img src="logo-horizontal-navy.svg" alt="Attigo horizontal logo in navy" width="1770" height="320"></div>
+                <a class="download" href="logo-horizontal-navy.svg" download>Download horizontal navy SVG</a>
+            </div>
+            <div class="card dark">
+                <h3>White on navy</h3>
+                <div class="art"><img src="logo-horizontal-white.svg" alt="Attigo horizontal logo in white" width="1770" height="320"></div>
+                <a class="download" href="logo-horizontal-white.svg" download>Download horizontal white SVG</a>
+            </div>
+        </div>
+    </section>
+
+    <section aria-labelledby="header-title">
+        <h2 id="header-title">Header size</h2>
+        <p class="section-note">36px high on desktop; 28px on narrow screens.</p>
+        <div class="header-demo">
+            <a class="brand" href="index.html"><img src="logo-horizontal-navy.svg" alt="Attigo home" width="1770" height="320"></a>
+            <nav aria-label="Light header example"><a href="index.html">Home</a><a href="services.html">Services</a><a href="argus.html">Argus</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+        </div>
+        <div class="header-demo dark">
+            <a class="brand" href="index.html"><img src="logo-horizontal-white.svg" alt="Attigo home" width="1770" height="320"></a>
+            <nav aria-label="Dark header example"><a href="index.html">Home</a><a href="services.html">Services</a><a href="argus.html">Argus</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+        </div>
+    </section>
+
+    <section aria-labelledby="symbol-title">
+        <h2 id="symbol-title">Symbol</h2>
+        <p class="section-note">A square asset for favicons and compact placements. Shown at actual pixel sizes.</p>
+        <div class="preview-grid">
+            <div class="card">
+                <h3>Navy on light</h3>
+                <div class="sizes">
+                    <figure><img src="logo-symbol-navy.svg" alt="Attigo symbol at 16 pixels" width="16" height="16"><figcaption>16px</figcaption></figure>
+                    <figure><img src="logo-symbol-navy.svg" alt="Attigo symbol at 32 pixels" width="32" height="32"><figcaption>32px</figcaption></figure>
+                    <figure><img src="logo-symbol-navy.svg" alt="Attigo symbol at 64 pixels" width="64" height="64"><figcaption>64px</figcaption></figure>
+                </div>
+                <a class="download" href="logo-symbol-navy.svg" download>Download navy symbol SVG</a>
+            </div>
+            <div class="card dark">
+                <h3>White on navy</h3>
+                <div class="sizes">
+                    <figure><img src="logo-symbol-white.svg" alt="Attigo symbol at 16 pixels" width="16" height="16"><figcaption>16px</figcaption></figure>
+                    <figure><img src="logo-symbol-white.svg" alt="Attigo symbol at 32 pixels" width="32" height="32"><figcaption>32px</figcaption></figure>
+                    <figure><img src="logo-symbol-white.svg" alt="Attigo symbol at 64 pixels" width="64" height="64"><figcaption>64px</figcaption></figure>
+                </div>
+                <a class="download" href="logo-symbol-white.svg" download>Download white symbol SVG</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="reference" aria-labelledby="reference-title">
+        <h2 id="reference-title">Original for reference</h2>
+        <img src="logo.png" alt="Original Attigo logo reference" width="1408" height="736">
+    </section>
+</main>
 </body>
 </html>
