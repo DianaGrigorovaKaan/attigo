@@ -1,5 +1,7 @@
 Attigo's website
 
+[Automatic PR checks and test reports](docs/continuous-integration.md).
+
 Static HTML, CSS, and JavaScript. No build step is required for deployment.
 
 Navigation is shared through `navigation.css` and `navigation.js` on the six main pages.
