@@ -129,16 +129,6 @@
         .site-header { background: var(--white); border-bottom: 1px solid var(--border); }
         .site-header-inner { max-width: 1120px; margin: 0 auto; padding: 18px 28px; display: flex; align-items: center; justify-content: space-between; }
         .site-logo img { height: 40px; display: block; }
-        .site-nav { display: flex; gap: 28px; align-items: center; }
-        .site-nav > a { text-decoration: none; color: var(--navy); font-size: 15px; font-weight: 500; }
-        .site-nav > a:hover { color: var(--lblue-bright); }
-        .nav-dd { position: relative; display: inline-flex; align-items: center; }
-        .nav-dd > a { text-decoration: none; color: var(--navy); font-size: 15px; font-weight: 500; }
-        .nav-dd > a.active { border-bottom: 2px solid var(--lblue-bright); padding-bottom: 2px; }
-        .nav-dd-menu { position: absolute; top: 100%; left: 0; display: flex; flex-direction: column; background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 6px 0; min-width: 160px; box-shadow: 0 8px 24px rgba(30,51,71,0.12); opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity .15s, transform .15s; z-index: 100; }
-        .nav-dd:hover .nav-dd-menu, .nav-dd:focus-within .nav-dd-menu { opacity: 1; visibility: visible; transform: translateY(0); }
-        .nav-dd-menu a { padding: 9px 18px; font-size: 14px; color: var(--navy); text-decoration: none; }
-        .nav-dd-menu a:hover { background: var(--bg); }
         .back-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.85rem; }
         .back-link:hover { color: #fff; }
         .site-footer { background: var(--navy-dark); color: var(--lblue-pale); padding: 48px 0 26px; }
@@ -154,20 +144,27 @@
         .sf-col a:hover { color: var(--lblue); }
         .sf-bottom { max-width: 1120px; margin: 26px auto 0; padding: 22px 28px 0; border-top: 1px solid #2C4154; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: 13px; color: var(--lblue-pale); }
     </style>
+    <link rel="stylesheet" href="navigation.css">
+    <script src="navigation.js" defer></script>
 </head>
 <body>
     <header class="site-header">
         <div class="site-header-inner">
             <a href="index.html" class="site-logo"><img src="logo.svg" alt="Attigo"></a>
-            <nav class="site-nav">
-                <a href="index.html">Home</a>
-                <a href="services.html">Services</a>
-                <div class="nav-dd">
-                    <a href="argus.html" class="active">Products</a>
-                    <div class="nav-dd-menu"><a href="argus.html">Argus</a></div>
-                </div>
-                <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
+            <nav class="site-navigation" aria-label="Main navigation">
+                <button class="navigation-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">Menu</button>
+                <ul class="navigation-links" id="primary-navigation">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li class="navigation-products">
+                        <button class="products-toggle" type="button" aria-expanded="true" aria-controls="product-links">Products <span aria-hidden="true">▾</span></button>
+                        <ul class="product-links" id="product-links">
+                            <li><a href="argus.html">Argus</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
             </nav>
         </div>
     </header>

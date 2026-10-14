@@ -4,25 +4,6 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     
-    // Mobile Menu Toggle
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const navList = document.querySelector('.nav-list');
-    
-    if (mobileMenuBtn && navList) {
-        mobileMenuBtn.addEventListener('click', function() {
-            navList.classList.toggle('active');
-            mobileMenuBtn.classList.toggle('active');
-        });
-        
-        // Close menu when clicking on a link
-        navList.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                navList.classList.remove('active');
-                mobileMenuBtn.classList.remove('active');
-            });
-        });
-    }
-    
     // Header scroll effect
     const header = document.querySelector('.header');
     let lastScroll = 0;
@@ -42,9 +23,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const fragment = this.getAttribute('href').slice(1);
+            if (!fragment) return;
+            let target;
+            try {
+                target = document.getElementById(decodeURIComponent(fragment));
+            } catch {
+                return;
+            }
             if (target) {
+                e.preventDefault();
                 const headerHeight = document.querySelector('.header').offsetHeight;
                 const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
                 
