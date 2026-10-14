@@ -7,7 +7,7 @@
     <meta name="description" content="Free tool to determine which EU cybersecurity regulations (CRA, NIS2, IEC 62443) apply to your product or organization." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <style>
         :root {
             --navy: #2E4A62;
@@ -24,8 +24,8 @@
             --success: #2D8659;
             --warning: #C27022;
             --error: #B83232;
-            --sans: 'Inter', system-ui, -apple-system, sans-serif;
-            --mono: 'IBM Plex Mono', ui-monospace, monospace;
+            --sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+            --mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -75,7 +75,7 @@
 
         .btn {
             display: inline-block; padding: 12px 26px; border: none; border-radius: 5px;
-            font-family: var(--mono); font-size: 0.9rem; font-weight: 500; letter-spacing: 0.02em;
+            font-family: var(--sans); font-size: 0.9rem; font-weight: 600;
             cursor: pointer; transition: background .15s, color .15s;
         }
         .btn-primary { background: var(--navy); color: #fff; }
@@ -125,12 +125,57 @@
         .footer a { color: var(--navy); text-decoration: none; font-weight: 500; }
 
         :focus-visible { outline: 2px solid var(--lblue-bright); outline-offset: 2px; }
+        /* site chrome */
+        .site-header { background: var(--white); border-bottom: 1px solid var(--border); }
+        .site-header-inner { max-width: 1120px; margin: 0 auto; padding: 18px 28px; display: flex; align-items: center; justify-content: space-between; }
+        .site-logo img { height: 40px; display: block; }
+        .site-nav { display: flex; gap: 28px; align-items: center; }
+        .site-nav > a { text-decoration: none; color: var(--navy); font-size: 15px; font-weight: 500; }
+        .site-nav > a:hover { color: var(--lblue-bright); }
+        .nav-dd { position: relative; display: inline-flex; align-items: center; }
+        .nav-dd > a { text-decoration: none; color: var(--navy); font-size: 15px; font-weight: 500; }
+        .nav-dd > a.active { border-bottom: 2px solid var(--lblue-bright); padding-bottom: 2px; }
+        .nav-dd-menu { position: absolute; top: 100%; left: 0; display: flex; flex-direction: column; background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 6px 0; min-width: 160px; box-shadow: 0 8px 24px rgba(30,51,71,0.12); opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity .15s, transform .15s; z-index: 100; }
+        .nav-dd:hover .nav-dd-menu, .nav-dd:focus-within .nav-dd-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .nav-dd-menu a { padding: 9px 18px; font-size: 14px; color: var(--navy); text-decoration: none; }
+        .nav-dd-menu a:hover { background: var(--bg); }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.85rem; }
+        .back-link:hover { color: #fff; }
+        .site-footer { background: var(--navy-dark); color: var(--lblue-pale); padding: 48px 0 26px; }
+        .site-footer-inner { max-width: 1120px; margin: 0 auto; padding: 0 28px; display: grid; gap: 32px; }
+        @media (min-width: 760px) { .site-footer-inner { grid-template-columns: 1.3fr 2fr; } }
+        .sf-logo { height: 26px; display: block; margin-bottom: 12px; filter: brightness(0) invert(1); opacity: .95; }
+        .sf-tagline { font-size: 14px; color: var(--lblue-pale); }
+        .sf-cols { display: grid; gap: 24px; grid-template-columns: repeat(3, 1fr); }
+        .sf-col h4 { color: #fff; font-size: 13px; font-weight: 600; margin-bottom: 10px; }
+        .sf-col ul { list-style: none; }
+        .sf-col li { margin-bottom: 8px; }
+        .sf-col a { color: var(--lblue-pale); text-decoration: none; font-size: 14px; }
+        .sf-col a:hover { color: var(--lblue); }
+        .sf-bottom { max-width: 1120px; margin: 26px auto 0; padding: 22px 28px 0; border-top: 1px solid #2C4154; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: 13px; color: var(--lblue-pale); }
     </style>
 </head>
 <body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a href="index.html" class="site-logo"><img src="logo.svg" alt="Attigo"></a>
+            <nav class="site-nav">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <div class="nav-dd">
+                    <a href="argus.html" class="active">Products</a>
+                    <div class="nav-dd-menu"><a href="argus.html">Argus</a></div>
+                </div>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
     <div class="header">
-        <h1>Argus Applicability Checker</h1>
+        <h1>Applicability Checker</h1>
         <p>Find out which EU cybersecurity regulations apply to your product</p>
+        <a href="argus.html" class="back-link">&larr; Back to Argus</a>
     </div>
 
     <div class="container">
@@ -225,14 +270,25 @@
             <div class="cta">
                 <h3>Now that you know what applies</h3>
                 <p>Argus verifies your product against CRA, NIS2 and IEC 62443 in your pipeline, and keeps the evidence current.</p>
-                <a href="https://attigo.dk" class="btn">Learn more about Argus</a>
+                <a href="argus.html" class="btn">Learn more about Argus</a>
             </div>
         </div>
     </div>
 
-    <div class="footer">
-        <p>Built by <a href="https://attigo.dk">Attigo</a>. This tool provides general guidance only, not legal advice.</p>
-    </div>
+    <footer class="site-footer">
+        <div class="site-footer-inner">
+            <div class="sf-brand">
+                <img src="logo.svg" alt="Attigo" class="sf-logo">
+                <p class="sf-tagline">This tool provides general guidance only, not legal advice.</p>
+            </div>
+            <div class="sf-cols">
+                <div class="sf-col"><h4>Product</h4><ul><li><a href="argus.html">Argus</a></li><li><a href="applicability-checker.html">Applicability checker</a></li></ul></div>
+                <div class="sf-col"><h4>Services</h4><ul><li><a href="services.html#security">Product Security</a></li><li><a href="services.html#integration">Integration Services</a></li></ul></div>
+                <div class="sf-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+            </div>
+        </div>
+        <div class="sf-bottom"><span>&copy; 2025 Attigo. All rights reserved.</span><span>Denmark</span></div>
+    </footer>
 
     <script>
         const answers = {};
