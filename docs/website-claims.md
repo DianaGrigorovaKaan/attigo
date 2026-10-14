@@ -6,7 +6,7 @@ Reviewed 14 October 2026 against the local Argus checkout at commit `5d66efdec1f
 
 The product owner defines Argus’s rules as designed for compliance coverage within a broader compliance plan. That plan assigns requirements to automated checks or to other methods, which may include manual assessments. Activities assigned to those other methods are outside Argus’s scope. Website copy should present the automated coverage and its evidence as the product’s purpose.
 
-This product intent comes from the owner. The implementation references below substantiate how the checks execute and record results; they are not an assessment of a customer’s complete coverage plan.
+The implementation references below document how the automated checks execute and record results.
 
 ## What the implementation supports
 
