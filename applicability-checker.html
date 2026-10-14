@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Argus Applicability Checker. Which regulations apply to you?</title>
-    <meta name="description" content="Free tool to determine which EU cybersecurity regulations (CRA, NIS2, IEC 62443) apply to your product or organization." />
+    <title>Argus Applicability Checker. Which rules may be relevant?</title>
+    <meta name="description" content="Initial screening for CRA product scope, NIS2 organizational scope and IEC 62443 industrial standards." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -58,7 +58,10 @@
         }
         .card h2 { font-size: 1.2rem; font-weight: 600; margin-bottom: 18px; color: var(--navy); }
 
-        .question { margin-bottom: 24px; }
+        .question { margin-bottom: 24px; border: 0; min-width: 0; }
+        .question legend { font-weight: 600; margin-bottom: 10px; }
+        .question-help { font-size: 0.85rem; color: var(--text-med); margin-bottom: 10px; }
+        .result-heading { display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; align-items: center; margin-bottom: 8px; }
         .question label { display: block; font-weight: 500; margin-bottom: 10px; }
 
         .options { display: flex; flex-direction: column; gap: 8px; }
@@ -171,101 +174,131 @@
 
     <div class="header">
         <h1>Applicability Checker</h1>
-        <p>Find out which EU cybersecurity regulations apply to your product</p>
+        <p>Check product obligations, organization obligations and industrial standards</p>
         <a href="argus.html" class="back-link">&larr; Back to Argus</a>
     </div>
 
     <div class="container">
         <div class="progress-bar" id="progressBar"></div>
 
-        <!-- Step 1: Product Type -->
         <div class="card step" id="step1">
-            <h2>Step 1: What do you make?</h2>
-            <div class="question">
-                <label>What best describes your product?</label>
+            <h2 tabindex="-1">Step 1: Your product</h2>
+            <fieldset class="question">
+                <legend>What best describes your product?</legend>
                 <div class="options" data-question="productType">
-                    <label class="option"><input type="radio" name="productType" value="hardware_software"> Hardware with embedded software (IoT, industrial equipment, medical devices)</label>
-                    <label class="option"><input type="radio" name="productType" value="software_only"> Software product (desktop, mobile, or server application)</label>
-                    <label class="option"><input type="radio" name="productType" value="saas"> Cloud/SaaS service (no installable product)</label>
-                    <label class="option"><input type="radio" name="productType" value="components"> Software components or libraries (used by other products)</label>
-                    <label class="option"><input type="radio" name="productType" value="ot_ics"> Operational technology / industrial control systems</label>
+                    <label class="option"><input type="radio" name="productType" value="hardware_software"> Hardware with embedded software</label>
+                    <label class="option"><input type="radio" name="productType" value="software_only"> Software product (desktop, mobile or server)</label>
+                    <label class="option"><input type="radio" name="productType" value="saas"> Cloud/SaaS service</label>
+                    <label class="option"><input type="radio" name="productType" value="components"> Software component or library</label>
+                    <label class="option"><input type="radio" name="productType" value="ot_ics"> OT / industrial control product</label>
                 </div>
-            </div>
+            </fieldset>
+            <fieldset class="question">
+                <legend>Which description fits its CRA scope?</legend>
+                <p class="question-help">Medical/IVD devices covered by MDR/IVDR are excluded. Health-sector use alone is not an exclusion. Open source alone is not an exemption.</p>
+                <p class="question-help"><a href="https://digital-strategy.ec.europa.eu/en/policies/cra-summary" target="_blank" rel="noopener">CRA scope and exclusions (opens a new tab)</a></p>
+                <div class="options" data-question="craScope">
+                    <label class="option"><input type="radio" name="craScope" value="commercial"> Commercial supply, with no known CRA exclusion</label>
+                    <label class="option"><input type="radio" name="craScope" value="excluded"> Covered by a CRA Article 2 product exclusion</label>
+                    <label class="option"><input type="radio" name="craScope" value="unknown"> Unsure, including non-commercial/open-source cases</label>
+                </div>
+            </fieldset>
             <button class="btn btn-primary" onclick="nextStep(1)" disabled id="btn1">Next</button>
         </div>
 
-        <!-- Step 2: Market -->
         <div class="card step hidden" id="step2">
-            <h2>Step 2: Where do you sell?</h2>
-            <div class="question">
-                <label>Do you sell or distribute your product in the EU market?</label>
+            <h2 tabindex="-1">Step 2: Market and connectivity</h2>
+            <fieldset class="question">
+                <legend>Is the product made available on the EU market?</legend>
                 <div class="options" data-question="euMarket">
-                    <label class="option"><input type="radio" name="euMarket" value="yes"> Yes, we sell in the EU</label>
-                    <label class="option"><input type="radio" name="euMarket" value="planning"> Not yet, but we plan to within 2 years</label>
-                    <label class="option"><input type="radio" name="euMarket" value="no"> No, and we have no plans to</label>
+                    <label class="option"><input type="radio" name="euMarket" value="yes"> Yes</label>
+                    <label class="option"><input type="radio" name="euMarket" value="planning"> Not yet, but planned</label>
+                    <label class="option"><input type="radio" name="euMarket" value="no"> No, and not planned</label>
                 </div>
-            </div>
-            <div class="question">
-                <label>Company size?</label>
-                <div class="options" data-question="companySize">
-                    <label class="option"><input type="radio" name="companySize" value="micro"> Micro (fewer than 10 employees)</label>
-                    <label class="option"><input type="radio" name="companySize" value="small"> Small (10-49 employees)</label>
-                    <label class="option"><input type="radio" name="companySize" value="medium"> Medium (50-249 employees)</label>
-                    <label class="option"><input type="radio" name="companySize" value="large"> Large (250+ employees)</label>
+            </fieldset>
+            <fieldset class="question">
+                <legend>Can it exchange data with another device or network?</legend>
+                <p class="question-help">Include intended or reasonably foreseeable connections through other systems.</p>
+                <div class="options" data-question="connectivity">
+                    <label class="option"><input type="radio" name="connectivity" value="internet"> Yes, via the internet</label>
+                    <label class="option"><input type="radio" name="connectivity" value="local_network"> Yes, locally or indirectly (including USB/Bluetooth)</label>
+                    <label class="option"><input type="radio" name="connectivity" value="no"> No direct or indirect data connection</label>
+                    <label class="option"><input type="radio" name="connectivity" value="unknown"> Unsure</label>
                 </div>
-            </div>
+            </fieldset>
             <button class="btn btn-outline" onclick="prevStep(2)">Back</button>
             <button class="btn btn-primary" onclick="nextStep(2)" disabled id="btn2">Next</button>
         </div>
 
-        <!-- Step 3: Connectivity -->
         <div class="card step hidden" id="step3">
-            <h2>Step 3: Product characteristics</h2>
-            <div class="question">
-                <label>Does your product connect to a network (internet, intranet, Bluetooth, etc.)?</label>
-                <div class="options" data-question="connectivity">
-                    <label class="option"><input type="radio" name="connectivity" value="internet"> Yes, connects to the internet</label>
-                    <label class="option"><input type="radio" name="connectivity" value="local_network"> Yes, connects to local networks only</label>
-                    <label class="option"><input type="radio" name="connectivity" value="no"> No network connectivity</label>
+            <h2 tabindex="-1">Step 3: Your organization</h2>
+            <fieldset class="question">
+                <legend>Does your organization provide services or carry out activities in the EU?</legend>
+                <p class="question-help">This is separate from where this particular product is sold.</p>
+                <div class="options" data-question="euActivity">
+                    <label class="option"><input type="radio" name="euActivity" value="yes"> Yes</label>
+                    <label class="option"><input type="radio" name="euActivity" value="no"> No</label>
+                    <label class="option"><input type="radio" name="euActivity" value="unknown"> Unsure / planned only</label>
                 </div>
-            </div>
-            <div class="question">
-                <label>Does your product process personal data?</label>
-                <div class="options" data-question="personalData">
-                    <label class="option"><input type="radio" name="personalData" value="yes"> Yes</label>
-                    <label class="option"><input type="radio" name="personalData" value="no"> No</label>
+            </fieldset>
+            <fieldset class="question">
+                <legend>What is your organization’s size under EU SME rules?</legend>
+                <p class="question-help">Use staff and financial thresholds, including partner/linked enterprises; headcount alone is not enough.</p>
+                <p class="question-help"><a href="https://eur-lex.europa.eu/eli/reco/2003/361/oj/eng" target="_blank" rel="noopener">EU SME definition (opens a new tab)</a></p>
+                <div class="options" data-question="companySize">
+                    <label class="option"><input type="radio" name="companySize" value="small"> Micro or small</label>
+                    <label class="option"><input type="radio" name="companySize" value="medium"> Medium</label>
+                    <label class="option"><input type="radio" name="companySize" value="large"> Large</label>
+                    <label class="option"><input type="radio" name="companySize" value="unknown"> Unsure</label>
                 </div>
-            </div>
+            </fieldset>
             <button class="btn btn-outline" onclick="prevStep(3)">Back</button>
             <button class="btn btn-primary" onclick="nextStep(3)" disabled id="btn3">Next</button>
         </div>
 
-        <!-- Step 4: Sector -->
         <div class="card step hidden" id="step4">
-            <h2>Step 4: Your sector</h2>
-            <div class="question">
-                <label>Which sector best describes your organization or customers?</label>
+            <h2 tabindex="-1">Step 4: Activity and intended use</h2>
+            <fieldset class="question">
+                <legend>Which activity does your own organization perform?</legend>
+                <p class="question-help">Choose your own activity, not your customers’ sector. Other activities can also be covered by NIS2.</p>
                 <div class="options" data-question="sector">
-                    <label class="option"><input type="radio" name="sector" value="energy"> Energy (power, oil, gas, utilities)</label>
-                    <label class="option"><input type="radio" name="sector" value="transport"> Transport (aviation, rail, maritime, road)</label>
-                    <label class="option"><input type="radio" name="sector" value="health"> Health (hospitals, medical devices, pharma)</label>
-                    <label class="option"><input type="radio" name="sector" value="finance"> Finance (banking, insurance, markets)</label>
-                    <label class="option"><input type="radio" name="sector" value="manufacturing"> Manufacturing (industrial, automotive)</label>
-                    <label class="option"><input type="radio" name="sector" value="digital"> Digital infrastructure (cloud, DNS, data centers)</label>
-                    <label class="option"><input type="radio" name="sector" value="other"> Other / General technology</label>
+                    <label class="option"><input type="radio" name="sector" value="energy"> Energy</label>
+                    <label class="option"><input type="radio" name="sector" value="transport"> Transport</label>
+                    <label class="option"><input type="radio" name="sector" value="health"> Healthcare / pharmaceuticals</label>
+                    <label class="option"><input type="radio" name="sector" value="manufacturing"> Manufacturing: medical devices, electronics, electrical equipment, machinery or transport equipment</label>
+                    <label class="option"><input type="radio" name="sector" value="digital"> Cloud, data centres, managed IT/security or other digital infrastructure</label>
+                    <label class="option"><input type="radio" name="sector" value="special_digital"> DNS, TLD registry, trust services or public telecoms</label>
+                    <label class="option"><input type="radio" name="sector" value="finance"> Banking, financial infrastructure or other finance</label>
+                    <label class="option"><input type="radio" name="sector" value="other"> Other activity / unsure</label>
                 </div>
-            </div>
+            </fieldset>
+            <fieldset class="question">
+                <legend>Is the product intended for industrial automation or control systems?</legend>
+                <p class="question-help">Consider its intended use, including use by your customers, in any sector.</p>
+                <div class="options" data-question="industrialUse">
+                    <label class="option"><input type="radio" name="industrialUse" value="yes"> Yes</label>
+                    <label class="option"><input type="radio" name="industrialUse" value="no"> No</label>
+                    <label class="option"><input type="radio" name="industrialUse" value="unknown"> Unsure</label>
+                </div>
+            </fieldset>
             <button class="btn btn-outline" onclick="prevStep(4)">Back</button>
-            <button class="btn btn-primary" onclick="showResults()">Show Results</button>
+            <button class="btn btn-primary" onclick="showResults()" disabled id="btn4">Show Results</button>
         </div>
 
         <!-- Results -->
         <div class="card step hidden" id="results">
-            <h2>Your applicability report</h2>
+            <h2 tabindex="-1">Your applicability report</h2>
+            <p class="question-help">Initial screening, not a compliance determination. Reviewed 14 October 2026.</p>
             <div id="resultCards"></div>
+            <button class="btn btn-outline" onclick="editAnswers()">Review answers</button>
+            <details style="margin-top:18px;">
+                <summary>Other frameworks to consider</summary>
+                <p class="question-help"><a href="https://www.nist.gov/publications/nist-cybersecurity-framework-csf-20">NIST CSF 2.0</a> offers voluntary guidance for organizations of any size or sector.</p>
+                <p class="question-help"><a href="https://single-market-economy.ec.europa.eu/sectors/electrical-and-electronic-engineering-industries-eei/radio-equipment-directive-red_en">Radio Equipment Directive</a> scope needs a separate radio-equipment assessment. These answers do not establish whether a product uses radio; local connectivity does not mean wired-only.</p>
+            </details>
 
             <div class="cta">
-                <h3>Now that you know what applies</h3>
+                <h3>Discuss your next steps</h3>
                 <p>Argus verifies your product against CRA, NIS2 and IEC 62443 in your pipeline, and keeps the evidence current.</p>
                 <a href="argus.html" class="btn">Learn more about Argus</a>
             </div>
@@ -313,15 +346,18 @@
         });
 
         function checkStepComplete() {
-            document.getElementById('btn1').disabled = !answers.productType;
-            document.getElementById('btn2').disabled = !(answers.euMarket && answers.companySize);
-            document.getElementById('btn3').disabled = !(answers.connectivity && answers.personalData);
+            document.getElementById('btn1').disabled = !(answers.productType && answers.craScope);
+            document.getElementById('btn2').disabled = !(answers.euMarket && answers.connectivity);
+            document.getElementById('btn3').disabled = !(answers.euActivity && answers.companySize);
+            document.getElementById('btn4').disabled = !(answers.sector && answers.industrialUse);
         }
 
         function nextStep(current) {
+            if (document.getElementById('btn' + current).disabled) return;
             document.getElementById('step' + current).classList.add('hidden');
             document.getElementById('step' + (current + 1)).classList.remove('hidden');
             updateProgress(current + 1);
+            document.querySelector('#step' + (current + 1) + ' h2').focus();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -329,144 +365,117 @@
             document.getElementById('step' + current).classList.add('hidden');
             document.getElementById('step' + (current - 1)).classList.remove('hidden');
             updateProgress(current - 1);
+            document.querySelector('#step' + (current - 1) + ' h2').focus();
         }
 
         function showResults() {
+            const results = evaluate(answers);
+            if (!results.length) return;
             document.getElementById('step4').classList.add('hidden');
             document.getElementById('results').classList.remove('hidden');
             updateProgress(5);
 
-            const results = evaluate();
             const container = document.getElementById('resultCards');
             container.innerHTML = '';
 
             results.forEach(r => {
                 const card = document.createElement('div');
                 card.className = 'result-card ' + r.status;
+                card.dataset.framework = r.id;
 
                 const tagClass = r.status === 'applies' ? 'tag-applies' : r.status === 'maybe' ? 'tag-maybe' : 'tag-na';
-                const tagText = r.status === 'applies' ? 'Likely Applies' : r.status === 'maybe' ? 'May Apply' : 'Likely Not Applicable';
+                const tagText = r.label;
 
                 card.innerHTML = `
-                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                    <div class="result-heading">
                         <h3>${r.name}</h3>
                         <span class="tag ${tagClass}">${tagText}</span>
                     </div>
                     <p>${r.reason}</p>
-                    ${r.deadline ? '<p style="margin-top:6px;font-weight:500;color:#1A1A2E;">Deadline: ' + r.deadline + '</p>' : ''}
-                    ${r.fines ? '<p style="margin-top:4px;font-size:0.85rem;color:' + (r.status === 'applies' ? '#B83232' : '#4A5568') + ';">Fines: ' + r.fines + '</p>' : ''}
+                    ${r.timing ? '<p style="margin-top:6px;">' + r.timing + '</p>' : ''}
+                    <p><a href="${r.source}" target="_blank" rel="noopener">Scope source (opens a new tab)</a></p>
                 `;
                 container.appendChild(card);
             });
+            document.querySelector('#results h2').focus();
         }
 
-        function evaluate() {
-            const results = [];
-            const { productType, euMarket, companySize, connectivity, personalData, sector } = answers;
-            const sellsInEU = euMarket === 'yes' || euMarket === 'planning';
-            const isConnected = connectivity !== 'no';
-            const isHardwareOrSoftware = productType === 'hardware_software' || productType === 'software_only' || productType === 'components';
-            const isOT = productType === 'ot_ics';
-            const isEssentialSector = ['energy', 'transport', 'health', 'finance', 'digital'].includes(sector);
+        function editAnswers() {
+            document.getElementById('results').classList.add('hidden');
+            document.getElementById('step4').classList.remove('hidden');
+            updateProgress(4);
+            document.querySelector('#step4 h2').focus();
+        }
 
-            // CRA
-            if (sellsInEU && isConnected && (isHardwareOrSoftware || isOT)) {
-                results.push({
-                    name: 'EU Cyber Resilience Act (CRA)',
-                    status: 'applies',
-                    reason: 'Your product has digital elements and is sold in the EU market. CRA applies to all products with digital elements that can connect to a network, regardless of company size.',
-                    deadline: 'December 2027 (full enforcement)',
-                    fines: 'Up to EUR 15 million or 2.5% of global annual turnover'
-                });
-            } else if (sellsInEU && productType === 'saas') {
-                results.push({
-                    name: 'EU Cyber Resilience Act (CRA)',
-                    status: 'maybe',
-                    reason: 'Pure SaaS services are generally excluded from CRA. However, if your service includes downloadable components, embedded firmware, or client-side software, CRA may apply to those elements.',
-                    deadline: 'December 2027',
-                    fines: 'Up to EUR 15 million or 2.5% of global annual turnover'
-                });
+        // Kept inline in both checkers to preserve the standalone widget.
+        // Update both copies; tests/checkers.spec.js checks parity. Sources: docs/checker-rules.md.
+        function evaluate(answers) {
+            const { productType, craScope, euMarket, connectivity, euActivity, companySize, sector, industrialUse } = answers;
+            if (!productType || !craScope || !euMarket || !connectivity || !euActivity || !companySize || !sector || !industrialUse) return [];
+
+            const cra = { id: 'cra', name: 'Cyber Resilience Act (CRA)', status: 'maybe', source: 'https://digital-strategy.ec.europa.eu/en/policies/cra-summary' };
+            // CRA Articles 2–3: product scope, exclusions and direct/indirect data connections.
+            if (euMarket === 'no') {
+                cra.status = 'not-applicable';
+                cra.reason = 'No EU product-market availability is indicated. Reassess if that changes.';
+            } else if (craScope === 'excluded') {
+                cra.status = 'not-applicable';
+                cra.reason = 'You identified an Article 2 exclusion. Confirm the specific product and legal basis; its sector alone does not establish an exclusion.';
+            } else if (productType === 'saas') {
+                cra.reason = 'Standalone SaaS is generally outside CRA product scope. Product-dependent remote processing or supplied software components need a separate scope check.';
+            } else if (connectivity === 'no') {
+                cra.status = 'not-applicable';
+                cra.reason = 'No intended or reasonably foreseeable direct or indirect data connection is indicated.';
+            } else if (craScope === 'unknown' || connectivity === 'unknown') {
+                cra.reason = 'Confirm commercial supply, any product exclusion, and direct or indirect data connectivity before deciding CRA scope.';
+            } else if (euMarket === 'planning') {
+                cra.reason = 'CRA is a planning consideration if the connected product enters the EU market; planned availability is not current market placement.';
             } else {
-                results.push({
-                    name: 'EU Cyber Resilience Act (CRA)',
-                    status: 'not-applicable',
-                    reason: !sellsInEU ? 'CRA applies to products placed on the EU market. Since you do not sell in the EU, CRA does not currently apply.' : 'Your product does not appear to have network-connected digital elements subject to CRA.'
-                });
+                cra.status = 'applies';
+                cra.reason = 'The declared commercial, connected product has indicators of CRA scope. Confirm its classification and obligations for your role.';
             }
+            if (cra.status !== 'not-applicable') cra.timing = 'Article 14 reporting applies from 11 September 2026; main requirements from 11 December 2027. Product transition rules also matter.';
 
-            // NIS2
-            if (sellsInEU && isEssentialSector && (companySize === 'medium' || companySize === 'large')) {
-                results.push({
-                    name: 'NIS2 Directive (EU 2022/2555)',
-                    status: 'applies',
-                    reason: 'Your organization operates in a sector covered by NIS2 and meets the size threshold. NIS2 applies to medium and large entities in essential and important sectors.',
-                    deadline: 'October 2024 (already in effect, national transposition varies)',
-                    fines: 'Up to EUR 10 million or 2% of global annual turnover'
-                });
-            } else if (sellsInEU && isEssentialSector) {
-                results.push({
-                    name: 'NIS2 Directive (EU 2022/2555)',
-                    status: 'maybe',
-                    reason: 'Your sector is covered by NIS2, but NIS2 primarily targets medium and large entities. Some member states may extend requirements to smaller entities. Check your national transposition.',
-                    deadline: 'October 2024',
-                    fines: 'Up to EUR 10 million or 2% of global annual turnover'
-                });
-            } else if (sellsInEU && sector === 'manufacturing') {
-                results.push({
-                    name: 'NIS2 Directive (EU 2022/2555)',
-                    status: 'maybe',
-                    reason: 'Manufacturing is listed as an "important" sector in NIS2 Annex II. Whether it applies depends on your specific sub-sector and company size.',
-                    deadline: 'October 2024',
-                    fines: 'Up to EUR 7 million or 1.4% of global annual turnover'
-                });
+            const nis2 = { id: 'nis2', name: 'NIS2 Directive', status: 'maybe', source: 'https://digital-strategy.ec.europa.eu/en/faqs/directive-measures-high-common-level-cybersecurity-across-union-nis2-directive-faqs' };
+            // NIS2 Articles 2, 4, 26 and Annexes I/II: entity activity is separate from product sales.
+            if (euActivity === 'no') {
+                nis2.status = 'not-applicable';
+                nis2.reason = 'No EU services or activities are indicated. Confirm territorial scope for the entity, including services supplied into the EU from abroad.';
+            } else if (euActivity === 'unknown') {
+                nis2.reason = 'Confirm the organization’s EU activities and jurisdiction. This cannot be inferred from this product’s sales market.';
+            } else if (sector === 'finance') {
+                nis2.reason = 'Check the exact financial entity type and DORA. Equivalent sector-specific requirements can replace the corresponding NIS2 provisions.';
+            } else if (sector === 'other') {
+                nis2.reason = 'Other activities can be covered, including water, food, chemicals, waste, postal services, research and public administration. Check Annexes I/II and national designations.';
+            } else if (sector === 'special_digital') {
+                nis2.status = 'applies';
+                nis2.reason = 'DNS, TLD registries, trust services and public telecoms have size-independent scope provisions. Confirm the precise entity type and national implementation.';
+            } else if (companySize === 'medium' || companySize === 'large') {
+                nis2.status = 'applies';
+                nis2.reason = 'Your declared activity and EU SME size indicate possible Annex I/II coverage, including listed manufacturing. Confirm the exact entity type and national implementation.';
             } else {
-                results.push({
-                    name: 'NIS2 Directive (EU 2022/2555)',
-                    status: 'not-applicable',
-                    reason: 'NIS2 targets organizations in essential and important sectors (energy, transport, health, finance, digital infrastructure). Your sector and size do not appear to trigger NIS2 obligations.'
-                });
+                nis2.reason = 'Small or uncertain size does not establish an exemption. Verify EU SME classification, size-independent exceptions and national designations.';
             }
+            if (nis2.status !== 'not-applicable') nis2.timing = 'National transposition deadline: 17 October 2024. Check the applicable national law and registration/reporting requirements.';
 
-            // IEC 62443
-            if (isOT || (productType === 'hardware_software' && (sector === 'energy' || sector === 'manufacturing' || sector === 'transport'))) {
-                results.push({
-                    name: 'IEC 62443 (Industrial Cybersecurity)',
-                    status: 'applies',
-                    reason: 'Your product is used in or is an industrial/OT environment. IEC 62443 is the primary standard for industrial automation and control system security. While not a regulation, it is increasingly referenced by regulators and required by customers.',
-                    deadline: 'No fixed deadline (voluntary standard, but increasingly required contractually)',
-                    fines: 'No direct fines, but non-compliance may block sales to regulated industries'
-                });
-            } else if (sector === 'health' && isHardwareOrSoftware) {
-                results.push({
-                    name: 'IEC 62443 (Industrial Cybersecurity)',
-                    status: 'maybe',
-                    reason: 'Medical devices increasingly reference IEC 62443 for network-connected components. If your product connects to hospital networks or clinical systems, customers may require IEC 62443 compliance.'
-                });
+            const iec = { id: 'iec62443', name: 'IEC 62443', status: 'maybe', source: 'https://syc-se.iec.ch/deliveries/cybersecurity-guidelines/security-standards-and-best-practices/iec-62443/' };
+            // Relevance follows intended IACS use, not the health/transport/energy sector label.
+            if (industrialUse === 'yes') {
+                iec.status = 'applies';
+                iec.reason = 'Industrial automation/control use makes this standards series relevant. Select the parts for your role and product; relevance does not itself create a legal obligation.';
+            } else if (industrialUse === 'no' && productType !== 'ot_ics') {
+                iec.status = 'not-applicable';
+                iec.reason = 'No industrial automation/control use is indicated. Sector alone does not establish IEC 62443 relevance; check any contractual requirements.';
             } else {
-                results.push({
-                    name: 'IEC 62443 (Industrial Cybersecurity)',
-                    status: 'not-applicable',
-                    reason: 'IEC 62443 is specific to industrial automation and control systems. Your product type and sector do not appear to require it.'
-                });
+                iec.reason = 'Clarify intended industrial automation/control use, especially for a product described as OT. The sector alone is insufficient.';
             }
 
-            // NIST CSF
-            results.push({
-                name: 'NIST Cybersecurity Framework 2.0',
-                status: sellsInEU || sector === 'finance' || sector === 'digital' ? 'maybe' : 'not-applicable',
-                reason: sellsInEU ? 'NIST CSF is voluntary but widely adopted as a best-practice framework. Many EU organizations use it alongside CRA/NIS2 for internal risk management.' : 'NIST CSF is a US-origin framework. It is voluntary and primarily adopted by organizations with US operations or those seeking a comprehensive security framework.'
-            });
-
-            // RED (Radio Equipment Directive)
-            if (sellsInEU && isConnected && (productType === 'hardware_software' || isOT)) {
-                results.push({
-                    name: 'EU Radio Equipment Directive (RED) / EN 18031',
-                    status: connectivity === 'internet' ? 'maybe' : 'not-applicable',
-                    reason: connectivity === 'internet' ? 'If your hardware product contains radio equipment (Wi-Fi, Bluetooth, cellular), the Radio Equipment Directive cybersecurity requirements (delegated act, EN 18031) may apply. CRA will eventually supersede RED cybersecurity requirements for most products.' : 'RED applies to radio equipment. Your product uses wired networking only.'
-                });
-            }
-
-            return results;
+            return [cra, nis2, iec].map(result => ({
+                ...result,
+                label: result.status === 'not-applicable' ? 'Not indicated' : result.id === 'iec62443'
+                    ? (result.status === 'applies' ? 'Relevant standard' : 'Check intended use')
+                    : (result.status === 'applies' ? 'Likely applies' : 'May apply')
+            }));
         }
 
         updateProgress(1);

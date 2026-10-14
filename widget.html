@@ -32,6 +32,10 @@
         .partner b { color: var(--navy); font-weight: 600; }
 
         .q { margin-bottom: 14px; }
+        .help { font-size: 0.75rem; color: var(--text-med); margin-bottom: 6px; }
+        .help a, .result a { color: var(--navy); }
+        .result p { margin-top: 8px; }
+        .result-heading { display: flex; flex-wrap: wrap; gap: 6px; justify-content: space-between; align-items: center; margin-bottom: 6px; }
         .q label { display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 6px; }
 
         select {
@@ -54,10 +58,10 @@
         }
         .result.applies { border-color: var(--error); background: #FBEDEE; }
         .result.maybe { border-color: var(--warning); background: #FAF1E8; }
-        .result.na { border-color: var(--success); background: #EBF4EF; }
+        .result.not-applicable { border-color: var(--success); background: #EBF4EF; }
         .result strong { font-size: 0.9rem; color: var(--navy); }
 
-        .tag { font-size: 0.68rem; font-weight: 600; padding: 1px 7px; border-radius: 8px; float: right; letter-spacing: 0.03em; }
+        .tag { font-size: 0.68rem; font-weight: 600; padding: 1px 7px; border-radius: 8px; letter-spacing: 0.03em; }
         .tag-y { background: #F6DCDC; color: var(--error); }
         .tag-m { background: #F4E3CC; color: #8A4F18; }
         .tag-n { background: #DCEDE4; color: #1F6644; }
@@ -80,62 +84,103 @@
 </head>
 <body>
     <div id="form">
-        <h2>Does CRA or NIS2 apply to you?</h2>
+        <h2 tabindex="-1">CRA, NIS2 and IEC 62443 screening</h2>
         <p class="partner" id="partnerLine">A quick applicability check for your product.</p>
 
         <div class="q">
-            <label>Product type</label>
-            <select id="pType">
+            <label for="productType">What best describes your product?</label>
+            <select id="productType">
                 <option value="">Select...</option>
-                <option value="hw">Hardware with software</option>
-                <option value="sw">Software product</option>
-                <option value="saas">SaaS / Cloud service</option>
-                <option value="ot">OT / Industrial</option>
-                <option value="comp">Software component</option>
+                <option value="hardware_software">Hardware with embedded software</option>
+                <option value="software_only">Software product (desktop, mobile or server)</option>
+                <option value="saas">Cloud/SaaS service</option>
+                <option value="components">Software component or library</option>
+                <option value="ot_ics">OT / industrial control product</option>
             </select>
         </div>
 
         <div class="q">
-            <label>Sell in EU?</label>
-            <select id="eu">
+            <label for="craScope">Which description fits its CRA scope?</label>
+            <p class="help" id="craScopeHelp">Medical/IVD devices covered by MDR/IVDR are excluded. Health-sector use alone is not an exclusion. Open source alone is not an exemption.</p>
+            <p class="help"><a href="https://digital-strategy.ec.europa.eu/en/policies/cra-summary" target="_blank" rel="noopener">CRA scope and exclusions (new tab)</a></p>
+            <select id="craScope" aria-describedby="craScopeHelp">
+                <option value="">Select...</option>
+                <option value="commercial">Commercial supply, with no known CRA exclusion</option>
+                <option value="excluded">Covered by a CRA Article 2 product exclusion</option>
+                <option value="unknown">Unsure, including non-commercial/open-source cases</option>
+            </select>
+        </div>
+
+        <div class="q">
+            <label for="euMarket">Is the product made available on the EU market?</label>
+            <select id="euMarket">
                 <option value="">Select...</option>
                 <option value="yes">Yes</option>
-                <option value="plan">Planning to</option>
-                <option value="no">No</option>
+                <option value="planning">Not yet, but planned</option>
+                <option value="no">No, and not planned</option>
             </select>
         </div>
 
         <div class="q">
-            <label>Network connected?</label>
-            <select id="net">
+            <label for="connectivity">Can it exchange data with another device or network?</label>
+            <p class="help" id="connectivityHelp">Include intended or reasonably foreseeable connections through other systems.</p>
+            <select id="connectivity" aria-describedby="connectivityHelp">
                 <option value="">Select...</option>
-                <option value="yes">Yes (internet)</option>
-                <option value="local">Local network only</option>
-                <option value="no">No</option>
+                <option value="internet">Yes, via the internet</option>
+                <option value="local_network">Yes, locally or indirectly (including USB/Bluetooth)</option>
+                <option value="no">No direct or indirect data connection</option>
+                <option value="unknown">Unsure</option>
             </select>
         </div>
 
         <div class="q">
-            <label>Company size</label>
-            <select id="size">
+            <label for="euActivity">Does your organization provide services or carry out activities in the EU?</label>
+            <p class="help" id="euActivityHelp">This is separate from where this particular product is sold.</p>
+            <select id="euActivity" aria-describedby="euActivityHelp">
                 <option value="">Select...</option>
-                <option value="s">Small (under 50)</option>
-                <option value="m">Medium (50-249)</option>
-                <option value="l">Large (250+)</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+                <option value="unknown">Unsure / planned only</option>
             </select>
         </div>
 
         <div class="q">
-            <label>Sector</label>
-            <select id="sector">
+            <label for="companySize">What is your organization’s size under EU SME rules?</label>
+            <p class="help" id="companySizeHelp">Use staff and financial thresholds, including partner/linked enterprises; headcount alone is not enough.</p>
+            <p class="help"><a href="https://eur-lex.europa.eu/eli/reco/2003/361/oj/eng" target="_blank" rel="noopener">EU SME definition (new tab)</a></p>
+            <select id="companySize" aria-describedby="companySizeHelp">
+                <option value="">Select...</option>
+                <option value="small">Micro or small</option>
+                <option value="medium">Medium</option>
+                <option value="large">Large</option>
+                <option value="unknown">Unsure</option>
+            </select>
+        </div>
+
+        <div class="q">
+            <label for="sector">Which activity does your own organization perform?</label>
+            <p class="help" id="sectorHelp">Choose your own activity, not your customers’ sector. Other activities can also be covered by NIS2.</p>
+            <select id="sector" aria-describedby="sectorHelp">
                 <option value="">Select...</option>
                 <option value="energy">Energy</option>
                 <option value="transport">Transport</option>
-                <option value="health">Health</option>
-                <option value="finance">Finance</option>
-                <option value="mfg">Manufacturing</option>
-                <option value="digital">Digital infra</option>
-                <option value="other">Other</option>
+                <option value="health">Healthcare / pharmaceuticals</option>
+                <option value="manufacturing">Manufacturing: medical devices, electronics, electrical equipment, machinery or transport equipment</option>
+                <option value="digital">Cloud, data centres, managed IT/security or other digital infrastructure</option>
+                <option value="special_digital">DNS, TLD registry, trust services or public telecoms</option>
+                <option value="finance">Banking, financial infrastructure or other finance</option>
+                <option value="other">Other activity / unsure</option>
+            </select>
+        </div>
+
+        <div class="q">
+            <label for="industrialUse">Is the product intended for industrial automation or control systems?</label>
+            <p class="help" id="industrialUseHelp">Consider its intended use, including use by your customers, in any sector.</p>
+            <select id="industrialUse" aria-describedby="industrialUseHelp">
+                <option value="">Select...</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+                <option value="unknown">Unsure</option>
             </select>
         </div>
 
@@ -143,11 +188,12 @@
     </div>
 
     <div id="results">
-        <h2>Results</h2>
+        <h2 tabindex="-1">Results</h2>
+        <p class="help">Initial screening, not a compliance determination. Reviewed 14 October 2026.</p>
         <div id="resultList"></div>
 
         <div class="cta">
-            <a href="https://attigo.dk">Argus automates compliance for CRA and NIS2 &rarr;</a>
+            <a href="https://attigo.dk/argus.html" target="_blank" rel="noopener">Explore Argus &rarr;</a>
         </div>
 
         <button class="btn btn-reset" onclick="resetForm()">Start over</button>
@@ -165,7 +211,7 @@
             }
         })();
 
-        const fields = ['pType', 'eu', 'net', 'size', 'sector'];
+        const fields = ['productType', 'craScope', 'euMarket', 'connectivity', 'euActivity', 'companySize', 'sector', 'industrialUse'];
         fields.forEach(id => document.getElementById(id).addEventListener('change', gate));
 
         function gate() {
@@ -174,44 +220,24 @@
         }
 
         function check() {
-            const p = document.getElementById('pType').value;
-            const eu = document.getElementById('eu').value;
-            const net = document.getElementById('net').value;
-            const sz = document.getElementById('size').value;
-            const sec = document.getElementById('sector').value;
-
-            const inEU = eu === 'yes' || eu === 'plan';
-            const connected = net !== 'no';
-            const isProduct = p === 'hw' || p === 'sw' || p === 'comp' || p === 'ot';
-            const essential = ['energy','transport','health','finance','digital'].includes(sec);
-            const big = sz === 'm' || sz === 'l';
-
-            const r = [];
-
-            // CRA
-            if (inEU && connected && isProduct) r.push({n:'CRA (Cyber Resilience Act)',s:'applies',d:'Your connected product sold in the EU triggers CRA. Deadline: Dec 2027.'});
-            else if (inEU && p === 'saas') r.push({n:'CRA',s:'maybe',d:'Pure SaaS is generally excluded, but downloadable components may be in scope.'});
-            else r.push({n:'CRA',s:'na',d:'CRA targets connected products sold in the EU.'});
-
-            // NIS2
-            if (inEU && essential && big) r.push({n:'NIS2 Directive',s:'applies',d:'Your sector and size trigger NIS2. Already in effect.'});
-            else if (inEU && essential) r.push({n:'NIS2',s:'maybe',d:'Your sector is covered but NIS2 mainly targets medium and large entities.'});
-            else r.push({n:'NIS2',s:'na',d:'NIS2 targets essential and important sectors at scale.'});
-
-            // IEC 62443
-            if (p === 'ot' || (p === 'hw' && (sec === 'energy' || sec === 'mfg'))) r.push({n:'IEC 62443',s:'applies',d:'Industrial and OT products increasingly require IEC 62443.'});
-            else r.push({n:'IEC 62443',s:'na',d:'IEC 62443 is specific to industrial control systems.'});
-
+            const answers = {};
+            fields.forEach(id => answers[id] = document.getElementById(id).value);
+            const results = evaluate(answers);
+            if (!results.length) return;
             const list = document.getElementById('resultList');
             list.innerHTML = '';
-            r.forEach(item => {
-                const tc = item.s === 'applies' ? 'tag-y' : item.s === 'maybe' ? 'tag-m' : 'tag-n';
-                const tl = item.s === 'applies' ? 'APPLIES' : item.s === 'maybe' ? 'MAYBE' : 'N/A';
-                list.innerHTML += `<div class="result ${item.s === 'na' ? 'na' : item.s}"><span class="tag ${tc}">${tl}</span><strong>${item.n}</strong><br/>${item.d}</div>`;
+            results.forEach(result => {
+                const tagClass = result.status === 'applies' ? 'tag-y' : result.status === 'maybe' ? 'tag-m' : 'tag-n';
+                list.innerHTML += `<div class="result ${result.status}" data-framework="${result.id}">
+                    <div class="result-heading"><strong>${result.name}</strong><span class="tag ${tagClass}">${result.label}</span></div>
+                    <p>${result.reason}</p>
+                    ${result.timing ? '<p>' + result.timing + '</p>' : ''}
+                    <p><a href="${result.source}" target="_blank" rel="noopener">Scope source (new tab)</a></p>
+                </div>`;
             });
-
             document.getElementById('form').style.display = 'none';
             document.getElementById('results').style.display = 'block';
+            document.querySelector('#results h2').focus();
         }
 
         function resetForm() {
@@ -219,6 +245,78 @@
             document.getElementById('results').style.display = 'none';
             fields.forEach(id => document.getElementById(id).value = '');
             gate();
+            document.querySelector('#form h2').focus();
+        }
+
+        // Kept inline in both checkers to preserve the standalone widget.
+        // Update both copies; tests/checkers.spec.js checks parity. Sources: docs/checker-rules.md.
+        function evaluate(answers) {
+            const { productType, craScope, euMarket, connectivity, euActivity, companySize, sector, industrialUse } = answers;
+            if (!productType || !craScope || !euMarket || !connectivity || !euActivity || !companySize || !sector || !industrialUse) return [];
+
+            const cra = { id: 'cra', name: 'Cyber Resilience Act (CRA)', status: 'maybe', source: 'https://digital-strategy.ec.europa.eu/en/policies/cra-summary' };
+            // CRA Articles 2–3: product scope, exclusions and direct/indirect data connections.
+            if (euMarket === 'no') {
+                cra.status = 'not-applicable';
+                cra.reason = 'No EU product-market availability is indicated. Reassess if that changes.';
+            } else if (craScope === 'excluded') {
+                cra.status = 'not-applicable';
+                cra.reason = 'You identified an Article 2 exclusion. Confirm the specific product and legal basis; its sector alone does not establish an exclusion.';
+            } else if (productType === 'saas') {
+                cra.reason = 'Standalone SaaS is generally outside CRA product scope. Product-dependent remote processing or supplied software components need a separate scope check.';
+            } else if (connectivity === 'no') {
+                cra.status = 'not-applicable';
+                cra.reason = 'No intended or reasonably foreseeable direct or indirect data connection is indicated.';
+            } else if (craScope === 'unknown' || connectivity === 'unknown') {
+                cra.reason = 'Confirm commercial supply, any product exclusion, and direct or indirect data connectivity before deciding CRA scope.';
+            } else if (euMarket === 'planning') {
+                cra.reason = 'CRA is a planning consideration if the connected product enters the EU market; planned availability is not current market placement.';
+            } else {
+                cra.status = 'applies';
+                cra.reason = 'The declared commercial, connected product has indicators of CRA scope. Confirm its classification and obligations for your role.';
+            }
+            if (cra.status !== 'not-applicable') cra.timing = 'Article 14 reporting applies from 11 September 2026; main requirements from 11 December 2027. Product transition rules also matter.';
+
+            const nis2 = { id: 'nis2', name: 'NIS2 Directive', status: 'maybe', source: 'https://digital-strategy.ec.europa.eu/en/faqs/directive-measures-high-common-level-cybersecurity-across-union-nis2-directive-faqs' };
+            // NIS2 Articles 2, 4, 26 and Annexes I/II: entity activity is separate from product sales.
+            if (euActivity === 'no') {
+                nis2.status = 'not-applicable';
+                nis2.reason = 'No EU services or activities are indicated. Confirm territorial scope for the entity, including services supplied into the EU from abroad.';
+            } else if (euActivity === 'unknown') {
+                nis2.reason = 'Confirm the organization’s EU activities and jurisdiction. This cannot be inferred from this product’s sales market.';
+            } else if (sector === 'finance') {
+                nis2.reason = 'Check the exact financial entity type and DORA. Equivalent sector-specific requirements can replace the corresponding NIS2 provisions.';
+            } else if (sector === 'other') {
+                nis2.reason = 'Other activities can be covered, including water, food, chemicals, waste, postal services, research and public administration. Check Annexes I/II and national designations.';
+            } else if (sector === 'special_digital') {
+                nis2.status = 'applies';
+                nis2.reason = 'DNS, TLD registries, trust services and public telecoms have size-independent scope provisions. Confirm the precise entity type and national implementation.';
+            } else if (companySize === 'medium' || companySize === 'large') {
+                nis2.status = 'applies';
+                nis2.reason = 'Your declared activity and EU SME size indicate possible Annex I/II coverage, including listed manufacturing. Confirm the exact entity type and national implementation.';
+            } else {
+                nis2.reason = 'Small or uncertain size does not establish an exemption. Verify EU SME classification, size-independent exceptions and national designations.';
+            }
+            if (nis2.status !== 'not-applicable') nis2.timing = 'National transposition deadline: 17 October 2024. Check the applicable national law and registration/reporting requirements.';
+
+            const iec = { id: 'iec62443', name: 'IEC 62443', status: 'maybe', source: 'https://syc-se.iec.ch/deliveries/cybersecurity-guidelines/security-standards-and-best-practices/iec-62443/' };
+            // Relevance follows intended IACS use, not the health/transport/energy sector label.
+            if (industrialUse === 'yes') {
+                iec.status = 'applies';
+                iec.reason = 'Industrial automation/control use makes this standards series relevant. Select the parts for your role and product; relevance does not itself create a legal obligation.';
+            } else if (industrialUse === 'no' && productType !== 'ot_ics') {
+                iec.status = 'not-applicable';
+                iec.reason = 'No industrial automation/control use is indicated. Sector alone does not establish IEC 62443 relevance; check any contractual requirements.';
+            } else {
+                iec.reason = 'Clarify intended industrial automation/control use, especially for a product described as OT. The sector alone is insufficient.';
+            }
+
+            return [cra, nis2, iec].map(result => ({
+                ...result,
+                label: result.status === 'not-applicable' ? 'Not indicated' : result.id === 'iec62443'
+                    ? (result.status === 'applies' ? 'Relevant standard' : 'Check intended use')
+                    : (result.status === 'applies' ? 'Likely applies' : 'May apply')
+            }));
         }
     </script>
 </body>
