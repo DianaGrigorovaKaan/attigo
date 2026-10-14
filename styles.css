@@ -520,6 +520,10 @@ h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
     font-size: 0.9375rem;
 }
 
+.highlight-content a {
+    text-decoration: underline;
+}
+
 .offerings-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

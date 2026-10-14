@@ -23,3 +23,6 @@ The applicability checker and standalone widget deliberately keep their rules in
 See [the screening decisions and sources](docs/checker-rules.md) before changing answers.
 Browser tests cover both forms; development-time checks compare every valid answer
 combination and independently verify important scope scenarios.
+
+See [website claim decisions and sources](docs/website-claims.md) before changing
+Argus capability claims or the site’s regulatory summaries.

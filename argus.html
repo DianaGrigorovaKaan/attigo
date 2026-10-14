@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Argus | Attigo</title>
-<meta name="description" content="Argus runs in your pipeline and verifies your product against the CRA, NIS2 and IEC 62443 on every push. Not a snapshot you signed once. A current record you can defend.">
+<meta name="description" content="Argus runs configured evidence checks in your pipeline to support CRA, NIS2 and IEC 62443 work. Review recorded results and follow up on gaps.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -107,7 +107,7 @@
   .section-body p + p { margin-top: 16px; }
   .muted { color: var(--text-med); }
 
-  /* attestation vs evidence */
+  /* review and repeatable checks */
   .versus { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 50px; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
   .versus > div { padding: 32px 32px 36px; background: var(--white); }
   .versus .col-att { border-right: 1px solid var(--border); }
@@ -223,27 +223,27 @@
   <!-- HERO -->
   <section class="hero">
     <div class="wrap">
-      <p class="eyebrow">Continuous compliance as code</p>
-      <h1>Attestation is <span class="accent">not</span> evidence.</h1>
+      <p class="eyebrow">Automated evidence checks</p>
+      <h1>Security evidence that <span class="accent">keeps up.</span></h1>
       <p class="lede">
-        Argus runs in your pipeline and verifies your product against the CRA, NIS2
-        and IEC 62443 on every push. <span class="strong">Not a snapshot you signed
-        once. A current record you can defend.</span>
+        Run configured checks on your project’s security evidence as part of your
+        build pipeline. <span class="strong">See what passed, what needs attention,
+        and when it was checked.</span>
       </p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="contact.html">Become a design partner</a>
         <a class="btn btn-ghost" href="#how">See how it works</a>
       </div>
 
-      <div class="record" role="img" aria-label="An evidence record showing three controls checked against specific CRA, NIS2 and IEC 62443 clauses, each marked pass, tied to a commit.">
+      <div class="record" role="img" aria-label="Illustrative results: an SBOM file, an incident response plan and a secure development lifecycle document were found. Each PASS refers only to file presence, not compliance.">
         <div class="record-head">
           <span>Evidence record</span>
-          <span class="passing">5 of 5 passing</span>
+          <span class="passing">3 of 3 passing</span>
         </div>
-        <div class="rrow"><span class="clause">CRA Annex I(1)</span><span class="what">secure by default configuration</span><span class="pass">PASS</span></div>
-        <div class="rrow"><span class="clause">NIS2 Art. 21(2)(d)</span><span class="what">supply chain security controls</span><span class="pass">PASS</span></div>
-        <div class="rrow"><span class="clause">IEC 62443-4-1</span><span class="what">secure update mechanism in place</span><span class="pass">PASS</span></div>
-        <div class="record-foot">verified on commit a1f3c9 &middot; mapped to source</div>
+        <div class="rrow"><span class="clause">CRA</span><span class="what">SBOM file found</span><span class="pass">PASS</span></div>
+        <div class="rrow"><span class="clause">NIS2</span><span class="what">incident response plan found</span><span class="pass">PASS</span></div>
+        <div class="rrow"><span class="clause">IEC 62443-4-1</span><span class="what">secure development lifecycle document found</span><span class="pass">PASS</span></div>
+        <div class="record-foot">Illustrative results for example commit a1f3c9 &middot; PASS means the file was found. Its content and adequacy still need review.</div>
       </div>
     </div>
   </section>
@@ -252,36 +252,37 @@
   <section>
     <div class="wrap">
       <p class="eyebrow section-eyebrow">The problem</p>
-      <h2>A signed PDF describes the past.</h2>
+      <h2>Keep evidence checks in your development workflow.</h2>
       <div class="section-body">
         <p>
-          Most compliance work produces a document. Someone reviews the system, writes
-          down what they found, signs it, and files it. The moment after, the code
-          changes. A dependency updates. A configuration drifts.
+          Security reviews establish what your team has assessed. As code, dependencies
+          and processes change, the supporting evidence needs attention too. Repeating
+          routine checks in the pipeline helps you spot missing or outdated artifacts.
         </p>
         <p class="muted">
-          The document keeps saying what was true on the day it was signed. Nobody
-          notices the gap until an auditor, or an incident, finds it for you.
+          Argus checks file presence, configured text patterns and dates. Configured Jira
+          and GitLab connectors can also collect issue and development workflow evidence.
+          Your team reviews what those results mean for the product and organization.
         </p>
       </div>
 
       <div class="versus">
         <div class="col-att">
-          <p class="tag">Attestation</p>
-          <p class="big">A stamp on a moment that has already passed.</p>
+          <p class="tag">Engineering review</p>
+          <p class="big">Assess the risks and the quality of the evidence.</p>
           <p class="note">
-            signed: 14 March 2026<br>
-            reviewed by: one person, once<br>
-            valid until: something changed
+            decide: scope and requirements<br>
+            assess: design and implementation<br>
+            record: decisions and follow-up
           </p>
         </div>
         <div class="col-evi">
-          <p class="tag">Evidence</p>
-          <p class="big">A current record, tied to the requirement it satisfies.</p>
+          <p class="tag">Repeatable checks</p>
+          <p class="big">Check the selected evidence again as work progresses.</p>
           <p class="note">
-            verified: on every push<br>
-            mapped to: a specific clause<br>
-            valid: right now
+            run: on configured pipeline events<br>
+            record: results and check time<br>
+            follow up: gaps and warnings
           </p>
         </div>
       </div>
@@ -292,22 +293,22 @@
   <section class="steps-sec" id="how">
     <div class="wrap">
       <p class="eyebrow section-eyebrow">How Argus works</p>
-      <h2>Three steps, then it keeps running.</h2>
+      <h2>Configure. Check. Review.</h2>
       <div class="steps">
         <div class="step">
           <span class="num">01</span>
-          <h3>Connect</h3>
-          <p>Point Argus at your repository and build pipeline. It reads your code, dependencies, configuration and process artifacts where they already live.</p>
+          <h3>Configure</h3>
+          <p>Choose a rule set and the files to check. Add Argus to your pipeline and select when it runs. Configure Jira or GitLab connectors if you want evidence from those systems.</p>
         </div>
         <div class="step">
           <span class="num">02</span>
-          <h3>Map</h3>
-          <p>Every check is tied to a specific clause. A CRA Annex I requirement, a NIS2 article, an IEC 62443 control. Nothing is checked without a reason you can cite.</p>
+          <h3>Check</h3>
+          <p>Check whether files exist, match specified text patterns or meet configured age limits. Record results with a timestamp and the Git commit when available. Connectors add their configured evidence checks.</p>
         </div>
         <div class="step">
           <span class="num">03</span>
-          <h3>Verify</h3>
-          <p>On every push, or on the schedule you set, Argus re-runs the checks and records the result. The evidence stays current and points back to the exact requirement.</p>
+          <h3>Review</h3>
+          <p>Review results locally or submit them to Command Central. Confirm the requirement mappings, investigate gaps and decide what further evidence or assessment is needed.</p>
         </div>
       </div>
     </div>
@@ -316,29 +317,32 @@
   <!-- FRAMEWORKS -->
   <section>
     <div class="wrap">
-      <p class="eyebrow section-eyebrow">What it covers</p>
-      <h2>The frameworks that decide whether you can sell.</h2>
+      <p class="eyebrow section-eyebrow">Framework templates</p>
+      <h2>Evidence for your compliance work.</h2>
       <div class="fw">
         <div class="fw-card">
           <span class="fw-badge">CRA</span>
           <p class="fw-cat">EU Regulation 2024/2847</p>
           <h3>Cyber Resilience Act</h3>
-          <p>Essential requirements from Annex I, conformity assessment readiness, and the technical documentation a Module A self assessment expects.</p>
+          <p>Evidence checks to support work on product cybersecurity and vulnerability handling. Confirm product scope and the required conformity assessment route; a passing check does not establish conformity.</p>
+          <p><a href="https://digital-strategy.ec.europa.eu/en/policies/cra-summary">CRA scope and assessment</a></p>
         </div>
         <div class="fw-card">
           <span class="fw-badge">NIS2</span>
           <p class="fw-cat">EU Directive 2022/2555</p>
           <h3>Network and information security</h3>
-          <p>The Article 21 risk management measures mapped to what your systems actually do, with the incident reporting timeline kept in view.</p>
+          <p>Evidence checks to support an organization’s cybersecurity risk management. Applicability, governance and incident reporting duties need review under the relevant national law.</p>
+          <p><a href="https://digital-strategy.ec.europa.eu/en/policies/nis2-directive">NIS2 organizational obligations</a></p>
         </div>
         <div class="fw-card">
           <span class="fw-badge">IEC 62443</span>
           <p class="fw-cat">Industrial and OT standard</p>
           <h3>Secure products for OT</h3>
-          <p>Secure development lifecycle and product requirements, checked against the security level you claim rather than the one you hope for.</p>
+          <p>The current template checks development artifacts relevant to IEC 62443-4-1. Assess the applicable parts separately; these checks do not establish a product security level or certification.</p>
+          <p><a href="https://webstore.iec.ch/en/publication/33615">IEC 62443-4-1 scope</a></p>
         </div>
       </div>
-      <p class="fw-note">This is the initial set. The rule set is built to extend, so new standards, framework updates and your own internal policies can be added as your obligations grow.</p>
+      <p class="fw-note">Templates are starting points for selected checks. Tailor them to your obligations and review their coverage. Each result reflects the configured checks and available evidence at the time of the run.</p>
     </div>
   </section>
 
@@ -349,7 +353,7 @@
         <div class="checker-text">
           <p class="eyebrow section-eyebrow">Before you start</p>
           <h2>Not sure which rules apply to you?</h2>
-          <p>Answer a few questions about your product and market. The applicability checker shows which of the CRA, NIS2 and IEC 62443 you need to account for, and why.</p>
+          <p>Answer a few questions about your product, organization and intended use. The checker highlights where CRA, NIS2 or IEC 62443 may be relevant and what to review next.</p>
         </div>
         <div class="checker-action">
           <a class="btn btn-primary" href="applicability-checker.html">Open the applicability checker</a>
@@ -387,10 +391,10 @@
   <section class="closing">
     <div class="wrap">
       <p class="eyebrow section-eyebrow">Argus by Attigo</p>
-      <h2>Compliance you can still prove the day after you signed it.</h2>
+      <h2>Build evidence checks into the way you work.</h2>
       <p class="kicker">
-        Attestation tells an assessor what you believed. <span class="accent">Evidence
-        shows them what is true.</span>
+        Bring your product, workflow and assessment goals.
+        <span class="accent">We’ll help you choose useful checks and plan the review around them.</span>
       </p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="contact.html">Become a design partner</a>
