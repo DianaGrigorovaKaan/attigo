@@ -2,11 +2,26 @@
 
 Reviewed 14 October 2026 against the local Argus checkout at commit `5d66efdec1f003a89ce7907c4bf17f9537385d14`. This records the evidence behind the website wording, not a complete product audit or verification of the deployed Argus version.
 
-## Product scope
+## Product and message
 
-The product owner defines Argus’s rules as designed for compliance coverage within a broader compliance plan. That plan assigns requirements to automated checks or to other methods, which may include manual assessments. Activities assigned to those other methods are outside Argus’s scope. Website copy should present the automated coverage and its evidence as the product’s purpose.
+The central product is the rules engine and evidence capture. Customers can introduce automated compliance checking into development even when they have no such capability today. Lead with the value: written procedures become repeatable pipeline checks, failures become actionable development work, and each run contributes evidence.
 
-The implementation references below document how the automated checks execute and record results.
+The attestation argument is central. A periodic manual observation establishes that a condition was met when inspected. Repeated automated checks build a recorded history of that condition across development. “Continuous evidence” means evidence captured on successive runs; the public example says “every checked build.” The message focuses on automating checkable facts within the customer’s compliance programme.
+
+Customers have different starting points:
+
+- Established teams can translate their ISMS controls, contractual obligations and internal policies into rules, including requirements beyond EU regulations.
+- Teams establishing their approach can use starter rule sets and optional Attigo consulting to define rules and complementary manual procedures.
+
+The supplied CRA, NIS2 and IEC rule sets are easy starting points, not complete framework solutions. Rules are designed with compliance coverage in mind. Requirements assigned to other methods remain outside Argus’s scope; the product page does not frame those deliberate choices as unfinished work.
+
+The operational example is a missing SBOM in a new project or evidence older than a configured policy permits. Argus exposes a failing check in the pipeline. The team can prioritise and assign the work in its normal planning process, and later runs check the condition again. This describes the team acting on results; it does not claim that Argus automatically creates or assigns development tasks.
+
+## Public illustration
+
+The hero shows three illustrative runs of the same SBOM-presence check. Each row has a time, an example commit and a PASS result. This makes the repeated observation tangible: “The SBOM was present in every checked build.” It is a marketing illustration of recorded run data, not a screenshot of a specific product screen.
+
+The [CRA customer template’s `CRA-DOC-003` rule](https://github.com/attigodk/argus/blob/5d66efdec1f003a89ce7907c4bf17f9537385d14/agent/rulesets/cra-customer-template.yaml) checks for `SBOM.json`. The [JSON report](https://github.com/attigodk/argus/blob/5d66efdec1f003a89ce7907c4bf17f9537385d14/agent/internal/output/json.go) supplies result, check time and available Git commit. The illustrated times and commits are fictional. The earlier local run verified the rule’s file-presence semantics; it was not an evaluation of a complete compliance plan.
 
 ## What the implementation supports
 
@@ -16,17 +31,8 @@ The implementation references below document how the automated checks execute an
 | Freshness checks | [Age evaluation](https://github.com/attigodk/argus/blob/5d66efdec1f003a89ce7907c4bf17f9537385d14/agent/internal/rules/file_age.go) can use Git history or declared document dates. The rule selects the date source and age threshold relevant to its intended coverage. |
 | Pipeline use and recorded results | The [GitHub Action](https://github.com/attigodk/argus/blob/5d66efdec1f003a89ce7907c4bf17f9537385d14/agent/action/action.yml) invokes the agent; the surrounding workflow determines when. The [JSON report](https://github.com/attigodk/argus/blob/5d66efdec1f003a89ce7907c4bf17f9537385d14/agent/internal/output/json.go) includes check time and Git HEAD when available. Describe the evidence in terms of the checks and the time of each run. |
 | Connected evidence | The [runner](https://github.com/attigodk/argus/blob/5d66efdec1f003a89ce7907c4bf17f9537385d14/agent/internal/runner/runner.go) supports optional Jira/GitLab scans and submission to Command Central. [GitLab checks](https://github.com/attigodk/argus/blob/5d66efdec1f003a89ce7907c4bf17f9537385d14/connectors/gitlab/checks/checks.go) and [Jira checks](https://github.com/attigodk/argus/blob/5d66efdec1f003a89ce7907c4bf17f9537385d14/connectors/jira/checks/checks.go) evaluate collected workflow data. The website acknowledges these capabilities as configured integrations. |
+| Pipeline feedback | The [runner’s exit-code handling](https://github.com/attigodk/argus/blob/5d66efdec1f003a89ce7907c4bf17f9537385d14/agent/internal/runner/runner.go) exposes rule failures to CI; the pipeline configuration determines how the team uses those results. |
 | Requirement mappings | Command Central stores [check-to-framework relationships](https://github.com/attigodk/argus/blob/5d66efdec1f003a89ce7907c4bf17f9537385d14/command-central/src/CommandCentral.Domain/Entities/ComplianceCheckFrameworkRule.cs); connectors also carry framework references. The [agent schema](https://github.com/attigodk/argus/blob/5d66efdec1f003a89ce7907c4bf17f9537385d14/agent/internal/config/config.go) executes configured rules. Present requirement coverage as a rule-design decision; a legal-clause field is not required on every agent rule. |
-
-## Public example
-
-The revised illustration uses actual checks from the customer templates:
-
-- [CRA](https://github.com/attigodk/argus/blob/5d66efdec1f003a89ce7907c4bf17f9537385d14/agent/rulesets/cra-customer-template.yaml): `CRA-DOC-003` checks whether `SBOM.json` exists.
-- [NIS2](https://github.com/attigodk/argus/blob/5d66efdec1f003a89ce7907c4bf17f9537385d14/agent/rulesets/nis2-customer-template.yaml): `NIS2-INC-001` checks whether `docs/incident-response-plan.md` exists.
-- [IEC 62443-4-1](https://github.com/attigodk/argus/blob/5d66efdec1f003a89ce7907c4bf17f9537385d14/agent/rulesets/iec62443-customer-template.yaml): `IEC-SM-001` checks whether `docs/secure-development-lifecycle.md` exists.
-
-The illustration names the conditions these checks evaluate and labels the commit as an example. A local run confirmed their file-presence behavior. That exercise verified individual check semantics; it did not evaluate the coverage of a complete rule set or compliance plan. Each check’s role is determined by that design.
 
 ## Regulatory sources and editorial decisions
 
@@ -38,7 +44,7 @@ The official EUR-Lex text was available through indexed excerpts; direct retriev
 
 ## Scope and maintenance
 
-Keep the Argus landing page, home-page product card and checker result CTA aligned around defined automated coverage and recorded evidence. Explain the boundary of automation once. Present the rules as designed parts of the compliance plan, and describe the checks performed precisely. Keep regulatory scope and dates grounded in primary sources.
+Keep the Argus landing page, home-page product card and checker CTA aligned around introducing automated checks, actionable pipeline feedback and evidence captured through development. Give the rules engine and evidence capture the lead; place starter sets and optional consulting in supporting sections. Preserve the attestation argument through specific, repeatable observations. Keep regulatory scope and dates grounded in primary sources.
 
 About and Contact describe consulting experience and services, rather than automatic product assurance; no biography claims were independently verified or rewritten. Questionnaire decisions remain documented separately in [checker-rules.md](checker-rules.md).
 

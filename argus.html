@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Argus | Attigo</title>
-<meta name="description" content="Argus automates defined compliance checks in your pipeline, recording evidence for CRA, NIS2 and IEC 62443 coverage.">
+<meta name="description" content="Put written procedures into practice with Argus. Automate compliance checks in your development pipeline and capture evidence on every run.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -107,7 +107,7 @@
   .section-body p + p { margin-top: 16px; }
   .muted { color: var(--text-med); }
 
-  /* coverage design and execution */
+  /* attestation and evidence; customer starting points */
   .versus { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 50px; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
   .versus > div { padding: 32px 32px 36px; background: var(--white); }
   .versus .col-att { border-right: 1px solid var(--border); }
@@ -116,6 +116,9 @@
   .col-evi .tag { color: var(--success); }
   .versus .big { font-family: var(--serif); font-weight: 400; color: var(--navy); font-size: 27px; line-height: 1.2; }
   .versus .note { font-family: var(--mono); font-size: 13px; margin-top: 18px; line-height: 1.8; color: var(--text-med); }
+
+  .versus .detail { margin-top: 18px; font-size: 16px; color: var(--text-med); }
+  .starting-points .tag { color: var(--navy); }
 
   /* steps */
   .steps-sec { background: var(--navy); color: #fff; }
@@ -223,65 +226,64 @@
   <!-- HERO -->
   <section class="hero">
     <div class="wrap">
-      <p class="eyebrow">Automated evidence checks</p>
-      <h1>Security evidence that <span class="accent">keeps up.</span></h1>
+      <p class="eyebrow">Compliance rules. Evidence capture.</p>
+      <h1>From attestation to <span class="accent">continuous evidence.</span></h1>
       <p class="lede">
-        Bring the automated part of your compliance plan into your build pipeline.
-        <span class="strong">Repeatable checks and recorded evidence for your defined
-        CRA, NIS2 and IEC 62443 coverage.</span>
+        Argus adds automated compliance checks to your development pipeline.
+        <span class="strong">Turn procedures into repeatable rules, make failures
+        visible, and capture evidence on every run.</span>
       </p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="contact.html">Become a design partner</a>
         <a class="btn btn-ghost" href="#how">See how it works</a>
       </div>
 
-      <div class="record" role="img" aria-label="Illustrative results: an SBOM file, an incident response plan and a secure development lifecycle document were found. Each PASS records the successful file-presence check shown.">
+      <div class="record" role="img" aria-label="Illustrative evidence history: the SBOM presence check passed on three builds, at 09:14, 10:32 and 11:05. Each result is associated with that build’s commit.">
         <div class="record-head">
           <span>Evidence record</span>
           <span class="passing">3 of 3 passing</span>
         </div>
-        <div class="rrow"><span class="clause">CRA</span><span class="what">SBOM file found</span><span class="pass">PASS</span></div>
-        <div class="rrow"><span class="clause">NIS2</span><span class="what">incident response plan found</span><span class="pass">PASS</span></div>
-        <div class="rrow"><span class="clause">IEC 62443-4-1</span><span class="what">secure development lifecycle document found</span><span class="pass">PASS</span></div>
-        <div class="record-foot">Illustrative file-presence checks &middot; example commit a1f3c9</div>
+        <div class="rrow"><span class="clause">09:14 &middot; a1f3c7</span><span class="what">SBOM present</span><span class="pass">PASS</span></div>
+        <div class="rrow"><span class="clause">10:32 &middot; a1f3c8</span><span class="what">SBOM present</span><span class="pass">PASS</span></div>
+        <div class="rrow"><span class="clause">11:05 &middot; a1f3c9</span><span class="what">SBOM present</span><span class="pass">PASS</span></div>
+        <div class="record-foot">Illustrative history &middot; the SBOM was present in every checked build.</div>
       </div>
     </div>
   </section>
 
-  <!-- COVERAGE -->
+  <!-- PROCEDURES IN PRACTICE -->
   <section>
     <div class="wrap">
-      <p class="eyebrow section-eyebrow">Designed coverage</p>
-      <h2>Compliance coverage by design.</h2>
+      <p class="eyebrow section-eyebrow">From policy to practice</p>
+      <h2>Your procedures are written. Put them to work.</h2>
       <div class="section-body">
         <p>
-          Rules are designed around the compliance requirements they cover. Argus runs
-          those checks as your development workflow progresses and records the results
-          as evidence of that coverage.
+          Procedures can be approved and published in an information security management
+          system (ISMS) while everyday development drifts. Argus turns the requirements
+          that can be automated into checks the team sees as it works.
         </p>
         <p class="muted">
-          The compliance plan also defines requirements fulfilled through other processes,
-          such as manual assessments. Those activities sit outside Argus’s scope.
+          A missing SBOM in a new project, or evidence older than your policy allows,
+          becomes a failing pipeline check. The team can prioritise it in sprint planning,
+          assign the fix and see the result on the next run, just like any other development issue.
         </p>
       </div>
 
       <div class="versus">
         <div class="col-att">
-          <p class="tag">Defined coverage</p>
-          <p class="big">Specify the requirements and evidence each rule covers.</p>
+          <p class="tag">Periodic attestation</p>
+          <p class="big">“The SBOM was present when I checked.”</p>
           <p class="note">
-            scope: the compliance plan<br>
-            rules: defined checks<br>
-            evidence: specified by each rule
+            checked: on review day<br>
+            recorded: by the reviewer
           </p>
         </div>
         <div class="col-evi">
-          <p class="tag">Repeatable execution</p>
-          <p class="big">Run the planned checks as your product evolves.</p>
+          <p class="tag">Continuous evidence</p>
+          <p class="big">“The SBOM was present in every checked build.”</p>
           <p class="note">
-            run: on configured pipeline events<br>
-            record: results and check time<br>
-            evidence: available with each report
+            checked: on each pipeline run<br>
+            recorded: result, time and commit
           </p>
         </div>
       </div>
@@ -292,22 +294,44 @@
   <section class="steps-sec" id="how">
     <div class="wrap">
       <p class="eyebrow section-eyebrow">How Argus works</p>
-      <h2>Configure. Check. Record.</h2>
+      <h2>A rules engine that keeps the evidence.</h2>
       <div class="steps">
         <div class="step">
           <span class="num">01</span>
-          <h3>Configure</h3>
-          <p>Select the rules for your planned compliance coverage. Add Argus to your pipeline and choose when it runs. Configure Jira or GitLab connectors to include evidence from those systems.</p>
+          <h3>Define the checks</h3>
+          <p>Translate your requirements and procedures into rules. Start with supplied rule sets or define your own checks for documents, specified content and evidence freshness.</p>
         </div>
         <div class="step">
           <span class="num">02</span>
-          <h3>Check</h3>
-          <p>Check whether files exist, match specified text patterns or meet configured age limits. Connector checks draw on issue and development workflow evidence from your connected systems.</p>
+          <h3>Run with development</h3>
+          <p>Add Argus to your pipeline and choose when it runs. Pass/fail results make the checks part of the team’s normal workflow. Jira and GitLab connectors can add evidence from your development systems.</p>
         </div>
         <div class="step">
           <span class="num">03</span>
-          <h3>Record</h3>
-          <p>Keep the results as evidence of the checks performed. Read reports locally or submit them to Command Central, with the check time and Git commit when available.</p>
+          <h3>Capture the evidence</h3>
+          <p>Capture each run’s results with the check time and Git commit when available. Keep reports locally or submit them to Command Central to build an evidence history as development proceeds.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CUSTOMER STARTING POINTS -->
+  <section>
+    <div class="wrap">
+      <p class="eyebrow section-eyebrow">Your compliance programme</p>
+      <h2>Start where you are.</h2>
+      <div class="versus starting-points">
+        <div class="col-att">
+          <p class="tag">Established compliance team</p>
+          <h3 class="big">Automate the procedures you already have.</h3>
+          <p class="detail">Your CISO and compliance team know the requirements. Turn the automatable parts of your ISMS controls, contractual obligations and internal policies into rules that run with development.</p>
+          <p class="detail">The rules engine can serve your own compliance profile, including requirements beyond EU regulations.</p>
+        </div>
+        <div class="col-evi">
+          <p class="tag">Building your approach</p>
+          <h3 class="big">Get started with rules and guidance.</h3>
+          <p class="detail">Use the supplied rule sets as a starting point. If you need support, Attigo can help you define the rules and the complementary manual procedures that fit your company.</p>
+          <p class="detail">Consulting is available alongside the product, from initial guidance to implementing your approach.</p>
         </div>
       </div>
     </div>
@@ -316,8 +340,8 @@
   <!-- FRAMEWORKS -->
   <section>
     <div class="wrap">
-      <p class="eyebrow section-eyebrow">Framework templates</p>
-      <h2>Evidence for your compliance work.</h2>
+      <p class="eyebrow section-eyebrow">Starter rule sets</p>
+      <h2>A starting point for your rules.</h2>
       <div class="fw">
         <div class="fw-card">
           <span class="fw-badge">CRA</span>
@@ -341,7 +365,7 @@
           <p><a href="https://webstore.iec.ch/en/publication/33615">IEC 62443-4-1 scope</a></p>
         </div>
       </div>
-      <p class="fw-note">Use the framework templates to define the automated checks for your applicable obligations and internal policies.</p>
+      <p class="fw-note">These starter sets provide selected checks for each framework. Combine them with your own rules and the other procedures in your compliance programme.</p>
     </div>
   </section>
 
@@ -390,10 +414,10 @@
   <section class="closing">
     <div class="wrap">
       <p class="eyebrow section-eyebrow">Argus by Attigo</p>
-      <h2>Build evidence checks into the way you work.</h2>
+      <h2>Make compliance part of everyday development.</h2>
       <p class="kicker">
-        Bring your product, workflow and compliance plan.
-        <span class="accent">We’ll help you put the automated coverage to work.</span>
+        Start with a procedure you want to automate.
+        <span class="accent">Let’s turn it into a check your team can use and evidence you can keep.</span>
       </p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="contact.html">Become a design partner</a>
