@@ -59,15 +59,6 @@
   }
   .site-logo img { height: 40px; display: block; }
   .site-logo { font-family: var(--sans); font-weight: 600; font-size: 20px; color: var(--navy); text-decoration: none; letter-spacing: 0.01em; }
-  .site-nav { display: flex; gap: 28px; }
-  .site-nav a { text-decoration: none; color: var(--navy); font-size: 15px; font-weight: 500; padding-bottom: 2px; transition: color .15s; }
-  .site-nav a:hover { color: var(--lblue-bright); }
-  .site-nav a.active { color: var(--navy); border-bottom: 2px solid var(--lblue-bright); }
-  .nav-dd { position: relative; display: inline-flex; align-items: center; }
-  .nav-dd-menu { position: absolute; top: 100%; left: 0; display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--border); border-radius: 6px; padding: 6px 0; min-width: 160px; box-shadow: 0 8px 24px rgba(30,51,71,0.12); opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity .15s ease, transform .15s ease; z-index: 100; }
-  .nav-dd:hover .nav-dd-menu, .nav-dd:focus-within .nav-dd-menu { opacity: 1; visibility: visible; transform: translateY(0); }
-  .nav-dd-menu a { padding: 9px 18px; font-size: 14px; color: var(--navy); border-bottom: 0; }
-  .nav-dd-menu a:hover { background: var(--bg); color: var(--navy); }
 
   /* ---------- hero ---------- */
   .hero { background: var(--navy); color: #fff; padding: 76px 0 88px; }
@@ -199,29 +190,33 @@
     .rrow .what { grid-column: 1 / -1; }
     .versus { grid-template-columns: 1fr; }
     .versus .col-att { border-right: 0; border-bottom: 1px solid var(--border); }
-    .site-nav { gap: 16px; }
     .sf-cols { grid-template-columns: 1fr 1fr; }
   }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 </style>
+    <link rel="stylesheet" href="navigation.css">
+    <script src="navigation.js" defer></script>
 </head>
 <body>
 
   <header class="site-header">
     <div class="site-header-inner">
       <a href="index.html" class="site-logo"><img src="logo.svg" alt="Attigo"></a>
-      <nav class="site-nav">
-        <a href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <div class="nav-dd">
-          <a href="argus.html" class="active">Products</a>
-          <div class="nav-dd-menu">
-            <a href="argus.html">Argus</a>
-          </div>
-        </div>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-      </nav>
+      <nav class="site-navigation" aria-label="Main navigation">
+                <button class="navigation-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">Menu</button>
+                <ul class="navigation-links" id="primary-navigation">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li class="navigation-products">
+                        <button class="products-toggle" type="button" aria-expanded="true" aria-controls="product-links">Products <span aria-hidden="true">▾</span></button>
+                        <ul class="product-links" id="product-links">
+                            <li><a href="argus.html" aria-current="page">Argus</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
     </div>
   </header>
 

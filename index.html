@@ -8,14 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-    <style>
-      .nav-dropdown { position: relative; }
-      .nav-dropdown-menu { position: absolute; top: 100%; left: 0; margin: 0; padding: 6px 0; list-style: none; background: #fff; border: 1px solid #D1D9E0; border-radius: 6px; min-width: 160px; box-shadow: 0 8px 24px rgba(30,51,71,0.12); opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity .15s ease, transform .15s ease; z-index: 100; }
-      .nav-dropdown:hover .nav-dropdown-menu, .nav-dropdown:focus-within .nav-dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
-      .nav-dropdown-menu li { margin: 0; }
-      .nav-dropdown-menu a { display: block; padding: 9px 18px; color: #2E4A62; text-decoration: none; font-size: 14px; white-space: nowrap; }
-      .nav-dropdown-menu a:hover { background: #F4F6F8; }
-    </style>
+    <link rel="stylesheet" href="navigation.css">
+    <script src="navigation.js" defer></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -24,24 +18,20 @@
             <a href="index.html" class="logo">
                 <img src="logo.svg" alt="Attigo">
             </a>
-            <nav class="nav">
-                <ul class="nav-list">
-                    <li><a href="index.html" class="nav-link active">Home</a></li>
-                    <li><a href="services.html" class="nav-link">Services</a></li>
-                    <li class="nav-dropdown">
-                        <a href="#" class="nav-link">Products</a>
-                        <ul class="nav-dropdown-menu">
+            <nav class="site-navigation" aria-label="Main navigation">
+                <button class="navigation-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">Menu</button>
+                <ul class="navigation-links" id="primary-navigation">
+                    <li><a href="index.html" aria-current="page">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li class="navigation-products">
+                        <button class="products-toggle" type="button" aria-expanded="true" aria-controls="product-links">Products <span aria-hidden="true">▾</span></button>
+                        <ul class="product-links" id="product-links">
                             <li><a href="argus.html">Argus</a></li>
                         </ul>
                     </li>
-                    <li><a href="about.html" class="nav-link">About</a></li>
-                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
-                <button class="mobile-menu-btn" aria-label="Toggle menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
             </nav>
         </div>
     </header>
