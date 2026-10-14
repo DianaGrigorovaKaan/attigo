@@ -1,14 +1,15 @@
 Attigo's website
 
 Static HTML, CSS, and JavaScript. No build step is required for deployment.
+See [the accessibility review](docs/accessibility-review.md) for findings, scope and validation.
 
 Navigation is shared through `navigation.css` and `navigation.js` on the six main pages.
 
-To run the navigation browser checks (Node.js 20+ and npm required):
+To run the browser checks (Node.js 20+ and npm required):
 
 ```sh
 npm ci
-npx playwright install chromium
+npx playwright install chromium firefox webkit
 npm test
 ```
 
@@ -16,6 +17,11 @@ The tests start a local server on port 4173 and cover desktop keyboard navigatio
 touch menus at 320, 390, and 768px, focus on resize, and navigation without JavaScript.
 To use an existing Chrome installation, set `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH`
 to its executable path when running `npm test`.
+
+The suite runs in Chromium, Firefox and WebKit, including skip links, narrow layouts,
+enlarged text and text spacing. Use `npm test -- --project=chromium` to run just
+Chromium. On Linux, Playwright may also require system libraries
+(`npx playwright install-deps`).
 
 Make changes on a branch and submit a pull request for review before merging.
 

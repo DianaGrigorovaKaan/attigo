@@ -126,7 +126,7 @@ for (const [name, changes] of [cases[0], cases[5], cases[6], cases[8], cases[16]
         await page.goto('/widget.html');
         for (const [key, value] of Object.entries(answers)) await page.locator('#' + key).selectOption(value);
         await page.getByRole('button', { name: 'Check applicability' }).click();
-        await expect(page.locator('#results h2')).toBeFocused();
+        await expect(page.locator('#results h1')).toBeFocused();
         expect(await page.locator('#resultList .tag').allTextContents()).toEqual(fullLabels);
         expect(await page.locator('#resultList .result > p:first-of-type').allTextContents()).toEqual(fullReasons);
         expect(errors).toEqual([]);
@@ -162,7 +162,7 @@ test('standalone widget validates, resets and fits a narrow viewport', async ({ 
     await expect(page.locator('[data-framework="cra"]')).toContainText('11 September 2026');
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
     await page.getByRole('button', { name: 'Start over' }).click();
-    await expect(page.locator('#form h2')).toBeFocused();
+    await expect(page.locator('#form h1')).toBeFocused();
     await expect(page.locator('#checkBtn')).toBeDisabled();
     for (const key of Object.keys(baseline)) await expect(page.locator('#' + key)).toHaveValue('');
     expect(widgetHtml).not.toMatch(/<script[^>]+src=/);
