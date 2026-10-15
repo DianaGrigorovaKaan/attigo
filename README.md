@@ -29,6 +29,9 @@ Chromium. On Linux, Playwright may also require system libraries
 
 Make changes on a branch and submit a pull request for review before merging.
 
+See [publishing the static site](docs/deployment.md) for the deployment file list
+and the location of the logo preview and archived design concepts.
+
 The applicability checker and standalone widget deliberately keep their rules inline.
 See [the screening decisions and sources](docs/checker-rules.md) before changing answers.
 Browser tests cover both forms; development-time checks compare every valid answer
