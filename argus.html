@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Argus | Attigo</title>
-<meta name="description" content="Argus runs in your pipeline and verifies your product against the CRA, NIS2 and IEC 62443 on every push. Not a snapshot you signed once. A current record you can defend.">
+<meta name="description" content="Put written procedures into practice with Argus. Automate compliance checks in your development pipeline and capture evidence on every run.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -107,7 +107,7 @@
   .section-body p + p { margin-top: 16px; }
   .muted { color: var(--text-med); }
 
-  /* attestation vs evidence */
+  /* attestation and evidence; customer starting points */
   .versus { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 50px; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
   .versus > div { padding: 32px 32px 36px; background: var(--white); }
   .versus .col-att { border-right: 1px solid var(--border); }
@@ -116,6 +116,9 @@
   .col-evi .tag { color: var(--success); }
   .versus .big { font-family: var(--serif); font-weight: 400; color: var(--navy); font-size: 27px; line-height: 1.2; }
   .versus .note { font-family: var(--mono); font-size: 13px; margin-top: 18px; line-height: 1.8; color: var(--text-med); }
+
+  .versus .detail { margin-top: 18px; font-size: 16px; color: var(--text-med); }
+  .starting-points .tag { color: var(--navy); }
 
   /* steps */
   .steps-sec { background: var(--navy); color: #fff; }
@@ -227,65 +230,64 @@
   <!-- HERO -->
   <section class="hero">
     <div class="wrap">
-      <p class="eyebrow">Continuous compliance as code</p>
-      <h1>Attestation is <span class="accent">not</span> evidence.</h1>
+      <p class="eyebrow">Compliance rules. Evidence capture.</p>
+      <h1>From attestation to <span class="accent">continuous evidence.</span></h1>
       <p class="lede">
-        Argus runs in your pipeline and verifies your product against the CRA, NIS2
-        and IEC 62443 on every push. <span class="strong">Not a snapshot you signed
-        once. A current record you can defend.</span>
+        Argus adds automated compliance checks to your development pipeline.
+        <span class="strong">Turn procedures into repeatable rules, make failures
+        visible, and capture evidence on every run.</span>
       </p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="contact.html">Become a design partner</a>
         <a class="btn btn-ghost" href="#how">See how it works</a>
       </div>
 
-      <div class="record" role="img" aria-label="An evidence record showing three controls checked against specific CRA, NIS2 and IEC 62443 clauses, each marked pass, tied to a commit.">
+      <div class="record" role="img" aria-label="Illustrative evidence history: the SBOM presence check passed on three builds, at 09:14, 10:32 and 11:05. Each result is associated with that build’s commit.">
         <div class="record-head">
           <span>Evidence record</span>
           <span class="passing">3 of 3 passing</span>
         </div>
-        <div class="rrow"><span class="clause">CRA Annex I(1)</span><span class="what">secure by default configuration</span><span class="pass">PASS</span></div>
-        <div class="rrow"><span class="clause">NIS2 Art. 21(2)(d)</span><span class="what">supply chain security controls</span><span class="pass">PASS</span></div>
-        <div class="rrow"><span class="clause">IEC 62443-4-1</span><span class="what">secure update mechanism in place</span><span class="pass">PASS</span></div>
-        <div class="record-foot">verified on commit a1f3c9 &middot; mapped to source</div>
+        <div class="rrow"><span class="clause">09:14 &middot; a1f3c7</span><span class="what">SBOM present</span><span class="pass">PASS</span></div>
+        <div class="rrow"><span class="clause">10:32 &middot; a1f3c8</span><span class="what">SBOM present</span><span class="pass">PASS</span></div>
+        <div class="rrow"><span class="clause">11:05 &middot; a1f3c9</span><span class="what">SBOM present</span><span class="pass">PASS</span></div>
+        <div class="record-foot">Illustrative history &middot; the SBOM was present in every checked build.</div>
       </div>
     </div>
   </section>
 
-  <!-- PROBLEM -->
+  <!-- PROCEDURES IN PRACTICE -->
   <section>
     <div class="wrap">
-      <p class="eyebrow section-eyebrow">The problem</p>
-      <h2>A signed PDF describes the past.</h2>
+      <p class="eyebrow section-eyebrow">From policy to practice</p>
+      <h2>Your procedures are written. Put them to work.</h2>
       <div class="section-body">
         <p>
-          Most compliance work produces a document. Someone reviews the system, writes
-          down what they found, signs it, and files it. The moment after, the code
-          changes. A dependency updates. A configuration drifts.
+          Procedures can be approved and published in an information security management
+          system (ISMS) while everyday development drifts. Argus turns the requirements
+          that can be automated into checks the team sees as it works.
         </p>
         <p class="muted">
-          The document keeps saying what was true on the day it was signed. Nobody
-          notices the gap until an auditor, or an incident, finds it for you.
+          A missing SBOM in a new project, or evidence older than your policy allows,
+          becomes a failing pipeline check. The team can prioritise it in sprint planning,
+          assign the fix and see the result on the next run, just like any other development issue.
         </p>
       </div>
 
       <div class="versus">
         <div class="col-att">
-          <p class="tag">Attestation</p>
-          <p class="big">A stamp on a moment that has already passed.</p>
+          <p class="tag">Periodic attestation</p>
+          <p class="big">“The SBOM was present when I checked.”</p>
           <p class="note">
-            signed: 14 March 2026<br>
-            reviewed by: one person, once<br>
-            valid until: something changed
+            checked: on review day<br>
+            recorded: by the reviewer
           </p>
         </div>
         <div class="col-evi">
-          <p class="tag">Evidence</p>
-          <p class="big">A current record, tied to the requirement it satisfies.</p>
+          <p class="tag">Continuous evidence</p>
+          <p class="big">“The SBOM was present in every checked build.”</p>
           <p class="note">
-            verified: on every push<br>
-            mapped to: a specific clause<br>
-            valid: right now
+            checked: on each pipeline run<br>
+            recorded: result, time and commit
           </p>
         </div>
       </div>
@@ -296,22 +298,44 @@
   <section class="steps-sec" id="how">
     <div class="wrap">
       <p class="eyebrow section-eyebrow">How Argus works</p>
-      <h2>Three steps, then it keeps running.</h2>
+      <h2>A rules engine that keeps the evidence.</h2>
       <div class="steps">
         <div class="step">
           <span class="num">01</span>
-          <h3>Connect</h3>
-          <p>Point Argus at your repository and build pipeline. It reads your code, dependencies, configuration and process artifacts where they already live.</p>
+          <h3>Define the checks</h3>
+          <p>Translate your requirements and procedures into rules. Start with supplied rule sets or define your own checks for documents, specified content and evidence freshness.</p>
         </div>
         <div class="step">
           <span class="num">02</span>
-          <h3>Map</h3>
-          <p>Every check is tied to a specific clause. A CRA Annex I requirement, a NIS2 article, an IEC 62443 control. Nothing is checked without a reason you can cite.</p>
+          <h3>Run with development</h3>
+          <p>Add Argus to your pipeline and choose when it runs. Pass/fail results make the checks part of the team’s normal workflow. Jira and GitLab connectors can add evidence from your development systems.</p>
         </div>
         <div class="step">
           <span class="num">03</span>
-          <h3>Verify</h3>
-          <p>On every push, or on the schedule you set, Argus re-runs the checks and records the result. The evidence stays current and points back to the exact requirement.</p>
+          <h3>Capture the evidence</h3>
+          <p>Capture each run’s results with the check time and Git commit when available. Keep reports locally or submit them to Command Central to build an evidence history as development proceeds.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CUSTOMER STARTING POINTS -->
+  <section>
+    <div class="wrap">
+      <p class="eyebrow section-eyebrow">Your compliance programme</p>
+      <h2>Start where you are.</h2>
+      <div class="versus starting-points">
+        <div class="col-att">
+          <p class="tag">Established compliance team</p>
+          <h3 class="big">Automate the procedures you already have.</h3>
+          <p class="detail">Your CISO and compliance team know the requirements. Turn the automatable parts of your ISMS controls, contractual obligations and internal policies into rules that run with development.</p>
+          <p class="detail">The rules engine can serve your own compliance profile, including requirements beyond EU regulations.</p>
+        </div>
+        <div class="col-evi">
+          <p class="tag">Building your approach</p>
+          <h3 class="big">Get started with rules and guidance.</h3>
+          <p class="detail">Use the supplied rule sets as a starting point. If you need support, Attigo can help you define the rules and the complementary manual procedures that fit your company.</p>
+          <p class="detail">Consulting is available alongside the product, from initial guidance to implementing your approach.</p>
         </div>
       </div>
     </div>
@@ -320,29 +344,32 @@
   <!-- FRAMEWORKS -->
   <section>
     <div class="wrap">
-      <p class="eyebrow section-eyebrow">What it covers</p>
-      <h2>The frameworks that decide whether you can sell.</h2>
+      <p class="eyebrow section-eyebrow">Starter rule sets</p>
+      <h2>A starting point for your rules.</h2>
       <div class="fw">
         <div class="fw-card">
           <span class="fw-badge">CRA</span>
           <p class="fw-cat">EU Regulation 2024/2847</p>
           <h3>Cyber Resilience Act</h3>
-          <p>Essential requirements from Annex I, conformity assessment readiness, and the technical documentation a Module A self assessment expects.</p>
+          <p>Rules for evidence supporting product cybersecurity and vulnerability handling, as part of the compliance plan for products within CRA scope.</p>
+          <p><a href="https://digital-strategy.ec.europa.eu/en/policies/cra-summary">CRA scope and assessment</a></p>
         </div>
         <div class="fw-card">
           <span class="fw-badge">NIS2</span>
           <p class="fw-cat">EU Directive 2022/2555</p>
           <h3>Network and information security</h3>
-          <p>The Article 21 risk management measures mapped to what your systems actually do, with the incident reporting timeline kept in view.</p>
+          <p>Rules for evidence supporting an organization’s cybersecurity risk management under the applicable national implementation of NIS2.</p>
+          <p><a href="https://digital-strategy.ec.europa.eu/en/policies/nis2-directive">NIS2 organizational obligations</a></p>
         </div>
         <div class="fw-card">
           <span class="fw-badge">IEC 62443</span>
           <p class="fw-cat">Industrial and OT standard</p>
           <h3>Secure products for OT</h3>
-          <p>Secure development lifecycle and product requirements, checked against the security level you claim rather than the one you hope for.</p>
+          <p>The current template checks development artifacts relevant to IEC 62443-4-1, supporting the secure development lifecycle for industrial and OT products.</p>
+          <p><a href="https://webstore.iec.ch/en/publication/33615">IEC 62443-4-1 scope</a></p>
         </div>
       </div>
-      <p class="fw-note">This is the initial set. The rule set is built to extend, so new standards, framework updates and your own internal policies can be added as your obligations grow.</p>
+      <p class="fw-note">These starter sets provide selected checks for each framework. Combine them with your own rules and the other procedures in your compliance programme.</p>
     </div>
   </section>
 
@@ -353,7 +380,7 @@
         <div class="checker-text">
           <p class="eyebrow section-eyebrow">Before you start</p>
           <h2>Not sure which rules apply to you?</h2>
-          <p>Answer a few questions about your product and market. The applicability checker shows which of the CRA, NIS2 and IEC 62443 you need to account for, and why.</p>
+          <p>Answer a few questions about your product, organization and intended use. The checker highlights where CRA, NIS2 or IEC 62443 may be relevant and what to review next.</p>
         </div>
         <div class="checker-action">
           <a class="btn btn-primary" href="applicability-checker.html">Open the applicability checker</a>
@@ -392,10 +419,10 @@
   <section class="closing">
     <div class="wrap">
       <p class="eyebrow section-eyebrow">Argus by Attigo</p>
-      <h2>Compliance you can still prove the day after you signed it.</h2>
+      <h2>Make compliance part of everyday development.</h2>
       <p class="kicker">
-        Attestation tells an assessor what you believed. <span class="accent">Evidence
-        shows them what is true.</span>
+        Start with a procedure you want to automate.
+        <span class="accent">Let’s turn it into a check your team can use and evidence you can keep.</span>
       </p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="contact.html">Become a design partner</a>
