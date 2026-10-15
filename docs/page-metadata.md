@@ -16,8 +16,8 @@ review; the tags identify a preferred URL without introducing server redirects.
 The standalone widget has its own canonical URL without the `partner` query
 parameter. Partner labels remain part of its display behaviour.
 
-The two logo design/preview pages are outside this metadata change. Their
-publication/indexing policy belongs to the remaining publication-cleanup task.
+The logo design/preview pages are development references and carry `noindex`.
+See [the deployment guide](deployment.md) for their locations and publication policy.
 
 ## Sharing images
 
