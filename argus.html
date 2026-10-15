@@ -242,7 +242,7 @@
       <div class="record" role="img" aria-label="An evidence record showing three controls checked against specific CRA, NIS2 and IEC 62443 clauses, each marked pass, tied to a commit.">
         <div class="record-head">
           <span>Evidence record</span>
-          <span class="passing">5 of 5 passing</span>
+          <span class="passing">3 of 3 passing</span>
         </div>
         <div class="rrow"><span class="clause">CRA Annex I(1)</span><span class="what">secure by default configuration</span><span class="pass">PASS</span></div>
         <div class="rrow"><span class="clause">NIS2 Art. 21(2)(d)</span><span class="what">supply chain security controls</span><span class="pass">PASS</span></div>
@@ -373,9 +373,9 @@
       <div class="code">
         <div class="code-head">
           <span>Embed code</span>
-          <button class="copy-btn" id="copyEmbed" type="button">Copy</button>
+          <button class="copy-btn" id="copyEmbed" type="button" hidden>Copy</button>
         </div>
-        <pre><code id="embedCode">&lt;iframe
+        <pre tabindex="0" role="region" aria-label="Embed code"><code id="embedCode">&lt;iframe
   src="https://attigo.dk/widget.html?partner=YourCompany"
   width="500"
   height="600"
@@ -383,6 +383,7 @@
   title="Compliance Applicability Checker"&gt;&lt;/iframe&gt;</code></pre>
       </div>
 
+      <p class="embed-meta" id="copyStatus" role="status"></p>
       <p class="embed-meta"><a href="widget.html" class="embed-link">Preview the widget</a> &middot; no cookies</p>
     </div>
   </section>
@@ -447,13 +448,19 @@
     (function(){
       var btn = document.getElementById('copyEmbed');
       if (!btn) return;
-      btn.addEventListener('click', function(){
-        var code = document.getElementById('embedCode').innerText;
-        navigator.clipboard.writeText(code).then(function(){
-          var prev = btn.textContent;
-          btn.textContent = 'Copied';
-          setTimeout(function(){ btn.textContent = prev; }, 1600);
-        });
+      var status = document.getElementById('copyStatus');
+      btn.hidden = false;
+      btn.addEventListener('click', async function(){
+        btn.disabled = true;
+        status.textContent = '';
+        try {
+          await navigator.clipboard.writeText(document.getElementById('embedCode').textContent);
+          status.textContent = 'Embed code copied.';
+        } catch {
+          status.textContent = 'Automatic copying is unavailable. Select the code above and copy it manually.';
+        } finally {
+          btn.disabled = false;
+        }
       });
     })();
   </script>
