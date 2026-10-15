@@ -117,11 +117,12 @@ test('Argus reduced motion disables card lift and native smooth scrolling', asyn
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await expect(card).toHaveCSS('transform', 'none');
     await expect(page.locator('html')).toHaveCSS('scroll-behavior', 'auto');
-    // Native anchor navigation should land immediately when motion is reduced.
-    const top = await page.evaluate(() => {
-        window.scrollTo({ top: 0, behavior: 'instant' });
-        document.querySelector('a[href="#how"]').click();
-        return document.getElementById('how').getBoundingClientRect().top;
-    });
-    expect(Math.abs(top)).toBeLessThan(1);
+    // Firefox can finish native fragment navigation after the click task returns.
+    // The CSS assertion above checks that the jump does not use smooth scrolling.
+    await page.locator('a[href="#how"]').click();
+    await expect(page).toHaveURL(/#how$/);
+    await expect.poll(async () => {
+        const top = await page.locator('#how').evaluate(el => el.getBoundingClientRect().top);
+        return Math.abs(top);
+    }).toBeLessThan(1);
 });
