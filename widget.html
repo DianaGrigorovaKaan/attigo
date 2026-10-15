@@ -27,7 +27,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        h2 { font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+        h1, h2 { font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
         .partner { font-size: 0.75rem; color: var(--text-med); margin-bottom: 14px; }
         .partner b { color: var(--navy); font-weight: 600; }
 
@@ -39,13 +39,14 @@
         .q label { display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 6px; }
 
         select {
-            width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: 5px;
+            width: 100%; min-width: 0; padding: 9px 12px; border: 1px solid #758493; border-radius: 5px;
             font-size: 0.9rem; font-family: inherit; color: var(--text); background: var(--white);
         }
-        select:focus { outline: 2px solid var(--lblue-bright); outline-offset: 1px; border-color: var(--lblue-bright); }
+        :focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; box-shadow: 0 0 0 5px #fff; }
+        select:focus { outline: 2px solid var(--navy); outline-offset: 1px; border-color: var(--lblue-bright); }
 
         .btn {
-            display: inline-block; width: 100%; padding: 11px 20px; background: var(--navy); color: #fff;
+            display: inline-block; width: 100%; min-width: 0; padding: 11px 20px; background: var(--navy); color: #fff;
             border: none; border-radius: 5px; font-size: 0.9rem; font-weight: 600; font-family: inherit;
             cursor: pointer; margin-top: 8px; transition: background .15s;
         }
@@ -83,8 +84,9 @@
     </style>
 </head>
 <body>
+    <main>
     <div id="form">
-        <h2 tabindex="-1">CRA, NIS2 and IEC 62443 screening</h2>
+        <h1 tabindex="-1">CRA, NIS2 and IEC 62443 screening</h1>
         <p class="partner" id="partnerLine">A quick applicability check for your product.</p>
 
         <div class="q">
@@ -188,7 +190,7 @@
     </div>
 
     <div id="results">
-        <h2 tabindex="-1">Results</h2>
+        <h1 tabindex="-1">Results</h1>
         <p class="help">Initial screening, not a compliance determination. Reviewed 14 October 2026.</p>
         <div id="resultList"></div>
 
@@ -200,6 +202,8 @@
     </div>
 
     <div class="powered">Powered by <a href="https://attigo.dk">Argus by Attigo</a></div>
+
+    </main>
 
     <script>
         // Co-branding via ?partner=Name
@@ -237,7 +241,7 @@
             });
             document.getElementById('form').style.display = 'none';
             document.getElementById('results').style.display = 'block';
-            document.querySelector('#results h2').focus();
+            document.querySelector('#results h1').focus();
         }
 
         function resetForm() {
@@ -245,7 +249,7 @@
             document.getElementById('results').style.display = 'none';
             fields.forEach(id => document.getElementById(id).value = '');
             gate();
-            document.querySelector('#form h2').focus();
+            document.querySelector('#form h1').focus();
         }
 
         // Kept inline in both checkers to preserve the standalone widget.

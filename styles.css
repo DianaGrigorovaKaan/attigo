@@ -9,8 +9,8 @@
     --color-bg-alt: #F4F6F8;
     --color-surface: #FFFFFF;
     --color-text: #1A1F26;
-    --color-text-muted: #6B7280;
-    --color-text-light: #9CA3AF;
+    --color-text-muted: #626A78;
+    --color-text-light: #626A78;
     --color-primary: #2E4A62;
     --color-primary-light: #3D5F7A;
     --color-primary-dark: #1E3448;
@@ -56,6 +56,7 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 100px;
 }
 
 body {
@@ -350,7 +351,7 @@ h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
 .card-number {
     font-family: var(--font-heading);
     font-size: 3rem;
-    color: var(--color-border);
+    color: var(--color-text-muted);
     line-height: 1;
     margin-bottom: var(--space-lg);
 }
@@ -475,7 +476,7 @@ h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
 .service-number {
     font-family: var(--font-heading);
     font-size: 4rem;
-    color: var(--color-border);
+    color: var(--color-text-muted);
     line-height: 1;
     flex-shrink: 0;
 }
@@ -768,7 +769,7 @@ h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
 .value-number {
     font-family: var(--font-heading);
     font-size: 2rem;
-    color: var(--color-border);
+    color: var(--color-text-muted);
     margin-bottom: var(--space-md);
 }
 
@@ -981,13 +982,13 @@ h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
     gap: var(--space-3xl);
 }
 
-.footer-col h4 {
+.footer-col h2 {
     font-family: var(--font-body);
     font-weight: 500;
     font-size: 0.75rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.65);
     margin-bottom: var(--space-md);
 }
 
@@ -1011,7 +1012,7 @@ h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
     display: flex;
     justify-content: space-between;
     font-size: 0.8125rem;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.65);
 }
 
 /* ============================================

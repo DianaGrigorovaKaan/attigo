@@ -112,8 +112,8 @@
         }
         .cta h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 8px; }
         .cta p { color: var(--lblue-pale); margin-bottom: 18px; font-size: 0.95rem; }
-        .cta .btn { background: var(--lblue-bright); color: #fff; }
-        .cta .btn:hover { background: #6c9ec1; }
+        .cta .btn { background: #456F8D; color: #fff; }
+        .cta .btn:hover { background: #3E627E; }
 
         .progress-bar { display: flex; gap: 5px; margin-bottom: 24px; }
         .progress-step { flex: 1; height: 4px; border-radius: 2px; background: var(--border); }
@@ -139,8 +139,8 @@
         @media (min-width: 760px) { .site-footer-inner { grid-template-columns: 1.3fr 2fr; } }
         .sf-logo { height: 26px; display: block; margin-bottom: 12px; filter: brightness(0) invert(1); opacity: .95; }
         .sf-tagline { font-size: 14px; color: var(--lblue-pale); }
-        .sf-cols { display: grid; gap: 24px; grid-template-columns: repeat(3, 1fr); }
-        .sf-col h4 { color: #fff; font-size: 13px; font-weight: 600; margin-bottom: 10px; }
+        .sf-cols { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+        .sf-col h2 { color: #fff; font-size: 13px; font-weight: 600; margin-bottom: 10px; }
         .sf-col ul { list-style: none; }
         .sf-col li { margin-bottom: 8px; }
         .sf-col a { color: var(--lblue-pale); text-decoration: none; font-size: 14px; }
@@ -151,6 +151,7 @@
     <script src="navigation.js" defer></script>
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <header class="site-header">
         <div class="site-header-inner">
             <a href="index.html" class="site-logo"><img src="logo.svg" alt="Attigo"></a>
@@ -171,6 +172,8 @@
             </nav>
         </div>
     </header>
+
+    <main id="main-content" tabindex="-1">
 
     <div class="header">
         <h1>Applicability Checker</h1>
@@ -305,6 +308,8 @@
         </div>
     </div>
 
+    </main>
+
     <footer class="site-footer">
         <div class="site-footer-inner">
             <div class="sf-brand">
@@ -312,9 +317,9 @@
                 <p class="sf-tagline">This tool provides general guidance only, not legal advice.</p>
             </div>
             <div class="sf-cols">
-                <div class="sf-col"><h4>Product</h4><ul><li><a href="argus.html">Argus</a></li><li><a href="applicability-checker.html">Applicability checker</a></li></ul></div>
-                <div class="sf-col"><h4>Services</h4><ul><li><a href="services.html#security">Product Security</a></li><li><a href="services.html#integration">Integration Services</a></li></ul></div>
-                <div class="sf-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+                <div class="sf-col"><h2>Product</h2><ul><li><a href="argus.html">Argus</a></li><li><a href="applicability-checker.html">Applicability checker</a></li></ul></div>
+                <div class="sf-col"><h2>Services</h2><ul><li><a href="services.html#security">Product Security</a></li><li><a href="services.html#integration">Integration Services</a></li></ul></div>
+                <div class="sf-col"><h2>Company</h2><ul><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></div>
             </div>
         </div>
         <div class="sf-bottom"><span>&copy; 2025 Attigo. All rights reserved.</span><span>Denmark</span></div>
