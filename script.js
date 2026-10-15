@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Header scroll effect
     const header = document.querySelector('.header');
-    let lastScroll = 0;
     
     window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset;
@@ -16,10 +15,11 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             header.style.boxShadow = 'none';
         }
-        
-        lastScroll = currentScroll;
     });
     
+    // Read the current preference on each click, including changes made while open.
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
@@ -38,47 +38,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 window.scrollTo({
                     top: targetPosition,
-                    behavior: 'smooth'
+                    behavior: reducedMotion.matches ? 'auto' : 'smooth'
                 });
             }
         });
     });
-    
-    // Animate elements on scroll
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-    
-    // Observe animated elements
-    document.querySelectorAll('.service-card, .offering-card, .value-card, .faq-item, .team-member').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
-    
-    // Add staggered animation delay
-    document.querySelectorAll('.services-grid .service-card').forEach((card, index) => {
-        card.style.transitionDelay = `${index * 0.1}s`;
-    });
-    
-    document.querySelectorAll('.offerings-grid .offering-card').forEach((card, index) => {
-        card.style.transitionDelay = `${index * 0.05}s`;
-    });
-    
-    document.querySelectorAll('.values-grid .value-card').forEach((card, index) => {
-        card.style.transitionDelay = `${index * 0.1}s`;
-    });
-    
 });

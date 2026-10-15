@@ -192,7 +192,11 @@
     .versus .col-att { border-right: 0; border-bottom: 1px solid var(--border); }
     .sf-cols { grid-template-columns: 1fr 1fr; }
   }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .fw-card { transition: box-shadow .18s ease, border-color .18s ease; }
+    .fw-card:hover { transform: none; }
+  }
 </style>
     <link rel="stylesheet" href="navigation.css">
     <script src="navigation.js" defer></script>
