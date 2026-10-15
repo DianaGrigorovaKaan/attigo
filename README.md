@@ -1,5 +1,7 @@
 Attigo's website
 
+[Automatic PR checks and test reports](docs/continuous-integration.md).
+
 Static HTML, CSS, and JavaScript. No build step is required for deployment.
 See [the accessibility review](docs/accessibility-review.md) for findings, scope and validation.
 
